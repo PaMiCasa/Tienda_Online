@@ -12,6 +12,8 @@
     text-align: center;
   }
 
+  /* 🔥 Eliminado porque era para el menú anterior (vertical desplegable) */
+  /*
   .navigation {
     flex-direction: column;
     gap: 0.5rem;
@@ -23,6 +25,7 @@
     padding: 0.5rem;
     font-size: 1rem;
   }
+  */
 
   /* Hero Section */
   .hero h2 {
@@ -73,8 +76,6 @@
     margin: 0.3rem;
   }
 }
-/* === Otros estilos responsive que ya tengas arriba === */
-
 
 /* === Responsive Header Styles === */
 .header-content {
@@ -156,9 +157,9 @@
     display: none;
   }
 
+  /* 🔥 Este se mantiene por si usás el menú normal en desktop */
   .navigation {
-    display: flex; /* el menú normal en desktop */
+    display: flex;
     gap: 1.5rem;
   }
 }
-
