@@ -12,10 +12,12 @@
 
   <!-- HEADER -->
  <header class="main-header">
-  <h1 class="logo">PA’ MI CASA</h1>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <div class="header-content">
+    <h1 class="logo">PA’ MI CASA</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
 
-  <!-- Side Menu -->
+  <!-- Menú lateral -->
   <nav class="side-menu" id="sideMenu">
     <button class="close-btn" onclick="toggleMenu()">×</button>
     <a href="#home">Home</a>
@@ -25,6 +27,10 @@
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <!-- Capa oscura detrás -->
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+</header>
 
   <!-- Overlay -->
   <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
