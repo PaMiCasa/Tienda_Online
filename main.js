@@ -1,4 +1,6 @@
 function toggleMenu() {
-  const nav = document.getElementById('mobileMenu');
-  nav.classList.toggle('active');
+  const menu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('overlay');
+  menu.classList.toggle('active');
+  overlay.classList.toggle('active');
 }
