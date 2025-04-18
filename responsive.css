@@ -149,17 +149,10 @@
   z-index: 1001;
 }
 
-/* Hide nav menu on desktop */
+/* En escritorio, ocultamos solo el menú horizontal */
 @media (min-width: 769px) {
-  .menu-toggle,
-  .side-menu,
-  .overlay {
+  .navigation {
     display: none;
   }
-
-  /* 🔥 Este se mantiene por si usás el menú normal en desktop */
-  .navigation {
-    display: flex;
-    gap: 1.5rem;
-  }
 }
+
