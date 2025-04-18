@@ -1,50 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PA’ MI CASA</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="responsive.css">
-
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
 </head>
 <body>
 
   <!-- HEADER -->
-<header class="main-header">
-  <div class="header-content">
-    <h1 class="logo">PA’ MI CASA</h1>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <a href="cart.html" class="cart-icon">
-      🛒 <span id="cart-count">0</span>
+  <header class="main-header">
+    <div class="header-content">
+      <h1 class="logo">PA’ MI CASA</h1>
 
-  </div>
-<header class="main-header">
-  <div class="header-content">
-    <h1 class="logo">PA’ MI CASA</h1>
-
-    <!-- Menú + Carrito juntos -->
-    <div class="header-actions">
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-      <a href="cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
+      <!-- Botón menú + Carrito -->
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <a href="cart.html" class="cart-icon">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- Menú lateral (sin botón de carrito) -->
-  <nav class="side-menu" id="sideMenu">
-    <button class="close-btn" onclick="toggleMenu()">×</button>
-    <a href="#home">Home</a>
-    <a href="#products">Products</a>
-    <a href="#deals">Deals</a>
-    <a href="#new">New</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <!-- Menú lateral -->
+    <nav class="side-menu" id="sideMenu">
+      <button class="close-btn" onclick="toggleMenu()">×</button>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#deals">Deals</a>
+      <a href="#new">New</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-</header>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+  </header>
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
@@ -59,29 +50,6 @@
     <div class="feature">💬 Personalized Support</div>
   </section>
 
-  <h1>Your Cart</h1>
-<div id="cart-items"></div>
-
-<script src="cart.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const container = document.getElementById("cart-items");
-
-    if (cart.length === 0) {
-      container.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
-      let html = "<ul>";
-      cart.forEach(item => {
-        html += `<li>${item.name} - $${item.price.toFixed(2)}</li>`;
-      });
-      html += "</ul>";
-      container.innerHTML = html;
-    }
-  });
-</script>
-
-
   <!-- PRODUCTS -->
   <section id="products" class="products">
     <h2>Featured Products</h2>
@@ -91,6 +59,12 @@
     <div class="product-grid" id="product-container">
       <!-- Products will be injected here dynamically by bot.js -->
     </div>
+  </section>
+
+  <!-- CART DISPLAY (optional in index or move to cart.html) -->
+  <section id="cart-display" class="cart-section">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
   </section>
 
   <!-- REVIEWS -->
@@ -110,9 +84,29 @@
     </div>
     <p>© 2025 PA’ MI CASA. All rights reserved.</p>
   </footer>
-  
+
+  <!-- SCRIPTS -->
   <script src="main.js"></script>
   <script src="cart.js"></script>
+  <script>
+    // Cart display inside index.html (optional)
+    document.addEventListener("DOMContentLoaded", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cart-items");
 
+      if (container) {
+        if (cart.length === 0) {
+          container.innerHTML = "<p>Your cart is empty.</p>";
+        } else {
+          let html = "<ul>";
+          cart.forEach(item => {
+            html += `<li>${item.name} - $${item.price.toFixed(2)}</li>`;
+          });
+          html += "</ul>";
+          container.innerHTML = html;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
