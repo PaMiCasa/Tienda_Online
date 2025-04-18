@@ -141,3 +141,16 @@
   padding: 2px 6px;
   font-size: 0.75rem;
 }
+
+.side-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin: 0.7rem 0; /* agrega espacio vertical */
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.side-menu a:hover {
+  color: #f0c040; /* opcional: color al pasar el mouse */
+}
