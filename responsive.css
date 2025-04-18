@@ -148,11 +148,5 @@
   cursor: pointer;
   z-index: 1001;
 }
-
-/* En escritorio, ocultamos solo el menú horizontal */
-@media (min-width: 769px) {
-  .navigation {
-    display: none;
-  }
-}
+ }
 
