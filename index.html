@@ -19,8 +19,20 @@
       🛒 <span id="cart-count">0</span>
 
   </div>
+<header class="main-header">
+  <div class="header-content">
+    <h1 class="logo">PA’ MI CASA</h1>
 
-  <!-- Menú lateral único -->
+    <!-- Menú + Carrito juntos -->
+    <div class="header-actions">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Menú lateral (sin botón de carrito) -->
   <nav class="side-menu" id="sideMenu">
     <button class="close-btn" onclick="toggleMenu()">×</button>
     <a href="#home">Home</a>
@@ -31,16 +43,8 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Capa oscura -->
   <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 </header>
-
-
-   <!-- Overlay -->
-  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-</header>
-
-
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
