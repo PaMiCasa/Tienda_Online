@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const artemisaMunicipios = [
     "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
     "Candelaria", "Guanajay", "Güira de Melena", "Mariel", 
-    "San Antonio de los Baños", "San Cristóbal" ,"Cabañas"
+    "San Antonio de los Baños", "San Cristóbal"
   ];
 
   provinceSelect.addEventListener("change", () => {
