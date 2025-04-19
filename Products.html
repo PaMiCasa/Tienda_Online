@@ -60,13 +60,29 @@
     const card = document.createElement("div");
     card.className = "product-card";
     card.innerHTML = `
-      <img src="${prod.imagen}" alt="${prod.nombre}">
-      <h3>${prod.nombre}</h3>
-      <p>${prod.descripcion}</p>
-      <p><strong>$${prod.precio}</strong></p>
-    `;
+  <img src="${prod.imagen}" alt="${prod.nombre}">
+  <h3>${prod.nombre}</h3>
+  <p>${prod.descripcion}</p>
+  <p><strong>$${prod.precio}</strong></p>
+  <button class="add-to-cart" data-id="${prod.id}">Añadir al carrito</button>
+`;
     container.appendChild(card);
   });
+
+  document.querySelectorAll(".add-to-cart").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const id = parseInt(e.target.dataset.id);
+    const producto = productos.find(p => p.id === id);
+    
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert(`${producto.nombre} añadido al carrito ✅`);
+  });
+});
+
+  
 </script>
 
 </body>
