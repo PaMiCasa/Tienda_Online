@@ -28,7 +28,7 @@ a {
 }
 .hander-banner {
   width: 100%;
-  max-height: 500px; /* Ajusta a tu gusto */
+  max-height: 300px; /* Ajusta a tu gusto */
   object-fit: cover;
 }
 
