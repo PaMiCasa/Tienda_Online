@@ -11,17 +11,11 @@
 
   <!-- HEADER -->
   <header class="main-header">
-    <div class="header-content">
-     <div class="logo">
-     <header class="main-header">
-  <div class="header-content">
-    <img src="hander-banner.png" alt="PA' MI CASA Banner" class="header-banner" />
-  </div>
+    <!-- Banner que cubre toda la parte superior -->
+    <img src="logoPaMiCasa.webp" alt="PA' MI CASA Banner" class="header-banner" />
 
-     </div>
-
-
-      <!-- Botón menú + Carrito -->
+    <!-- Botón menú + Carrito flotando encima del banner -->
+    <div class="header-overlay">
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <a href="cart.html" class="cart-icon">
@@ -67,7 +61,7 @@
     </div>
   </section>
 
-  <!-- CART DISPLAY (optional in index or move to cart.html) -->
+  <!-- CART DISPLAY -->
   <section id="cart-display" class="cart-section">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
@@ -95,7 +89,6 @@
   <script src="main.js"></script>
   <script src="cart.js"></script>
   <script>
-    // Cart display inside index.html (optional)
     document.addEventListener("DOMContentLoaded", () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const container = document.getElementById("cart-items");
