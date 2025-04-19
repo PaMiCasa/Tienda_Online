@@ -92,7 +92,7 @@
   left: -250px;
   width: 250px;
   height: 100vh;
-  background-color: #023047; /* fondo oscuro tipo azul profundo */
+  background-color: #009ecf; /* azul del banner */
   color: white;
   display: flex;
   flex-direction: column;
@@ -118,7 +118,7 @@
 }
 
 .side-menu a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .overlay {
