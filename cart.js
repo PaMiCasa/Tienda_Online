@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll('.add-to-cart');
   const cartCount = document.getElementById('cart-count');
+  const container = document.getElementById("cart-items");
+  const totalContainer = document.getElementById("cart-total");
+  const clearBtn = document.getElementById("clear-cart");
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -9,14 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
       cartCount.textContent = cart.length;
     }
   }
-document.addEventListener("DOMContentLoaded", () => {
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  const container = document.getElementById("cart-items");
-  const totalContainer = document.getElementById("cart-total");
-  const clearBtn = document.getElementById("clear-cart");
 
   function renderCart() {
-    if (cartItems.length === 0) {
+    if (!container || !totalContainer) return;
+
+    if (cart.length === 0) {
       container.innerHTML = "<p>Your cart is empty.</p>";
       totalContainer.innerHTML = "";
       return;
@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let html = "<ul>";
     let total = 0;
 
-    cartItems.forEach((item, index) => {
+    cart.forEach((item, index) => {
       html += `
         <li>
-          ${item.nombre} - $${item.precio.toFixed(2)}
-          <button onclick="removeItem(${index})">Remove</button>
+          <strong>${item.name}</strong> - $${item.price.toFixed(2)}
+          <button onclick="removeItem(${index})">❌</button>
         </li>`;
       total += item.price;
     });
@@ -40,21 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.removeItem = function(index) {
-    cartItems.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
+    updateCartCount();
   };
 
-  clearBtn.addEventListener("click", () => {
-    localStorage.removeItem("cart");
-    location.reload();
-  });
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      localStorage.removeItem("cart");
+      cart = [];
+      renderCart();
+      updateCartCount();
+    });
+  }
 
-  renderCart();
-});
-
-  updateCartCount();
-
+  // Añadir al carrito
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       const name = button.dataset.name;
@@ -66,5 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`${name} added to cart!`);
     });
   });
-});
 
+  updateCartCount();
+  renderCart();
+});
