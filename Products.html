@@ -52,5 +52,22 @@
   <script src="main.js"></script>
   <script src="cart.js"></script>
   <script src="location.js"></script>
+  <script src="productos.js"></script>
+<script>
+  const container = document.getElementById("product-container");
+
+  productos.forEach(prod => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = `
+      <img src="${prod.imagen}" alt="${prod.nombre}">
+      <h3>${prod.nombre}</h3>
+      <p>${prod.descripcion}</p>
+      <p><strong>$${prod.precio}</strong></p>
+    `;
+    container.appendChild(card);
+  });
+</script>
+
 </body>
 </html>
