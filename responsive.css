@@ -157,3 +157,19 @@
   padding: 2px 6px;
   font-size: 0.75rem;
 }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-icon {
+  height: 40px; /* ajustalo si querés más grande o más chico */
+  width: auto;
+}
+
+.logo-text {
+  font-family: 'Poppins', sans-serif; /* o la fuente que estés usando */
+  font-size: 1.8rem;
+  color: white;
+}
