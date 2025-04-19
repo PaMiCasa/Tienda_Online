@@ -35,7 +35,7 @@ a {
 
 .header-overlay {
   position: absolute;
-  top: 1rem;
+  top: 2.8rem;
   right: 2rem;
   z-index: 1001;
   display: flex;
