@@ -64,7 +64,13 @@
   <h3>${prod.nombre}</h3>
   <p>${prod.descripcion}</p>
   <p><strong>$${prod.precio}</strong></p>
-  <button class="add-to-cart" data-id="${prod.id}">Añadir al carrito</button>
+  <button 
+    class="add-to-cart" 
+    data-name="${prod.nombre}" 
+    data-price="${prod.precio}">
+    Añadir al carrito
+  </button>
+
 `;
     container.appendChild(card);
   });
