@@ -64,4 +64,20 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("provincia") || !localStorage.getItem("municipio")) {
     modal.style.display = "flex";
   }
+  // Mostrar provincia y municipio en el header
+function mostrarUbicacionEnHeader() {
+  const prov = localStorage.getItem("provincia");
+  const mun = localStorage.getItem("municipio");
+  const zona = document.getElementById("provincia-info");
+
+  if (prov && mun && zona) {
+    zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
+  }
+}
+
+// Ejecutarlo si ya están los datos
+if (localStorage.getItem("provincia") && localStorage.getItem("municipio")) {
+  mostrarUbicacionEnHeader();
+}
+
 });
