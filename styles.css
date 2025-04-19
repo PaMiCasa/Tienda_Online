@@ -288,16 +288,25 @@ footer {
   }
 }
 
+/* === Estilo para ubicación mostrada en el header === */
 .provincia-info {
   position: absolute;
-  top: 4.8rem;
-  right: 2rem;
-  background-color: rgba(255, 255, 255, 0.85);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: #024c64;
+  top: 1.2rem;
+  right: 6.5rem; /* separa del menú y carrito */
+  background-color: #ffffff;
+  color: #0077b6;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
   font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
+/* Ícono */
+.provincia-info::before {
+  content: "📍";
+}
