@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "flex";
   }
   // Mostrar provincia y municipio en el header
-function mostrarUbicacionEnHeader() {
+  function mostrarUbicacionEnHeader() {
   const prov = localStorage.getItem("provincia");
   const mun = localStorage.getItem("municipio");
   const zona = document.getElementById("provincia-info");
