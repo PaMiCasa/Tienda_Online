@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartItems.forEach((item, index) => {
       html += `
         <li>
-          ${item.name} - $${item.price.toFixed(2)}
+          ${item.nombre} - $${item.precio.toFixed(2)}
           <button onclick="removeItem(${index})">Remove</button>
         </li>`;
       total += item.price;
