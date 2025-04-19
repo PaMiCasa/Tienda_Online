@@ -15,11 +15,13 @@
   /* Hero Section */
   .hero h2 {
     font-size: 1.8rem;
+    color: #0077b6;
   }
 
   .hero p {
     font-size: 1rem;
     padding: 0 1rem;
+    color: #555;
   }
 
   /* Features */
@@ -28,6 +30,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1.5rem 1rem;
+    background-color: #f0fbff;
   }
 
   .feature {
@@ -48,17 +51,21 @@
   /* Reviews */
   .reviews {
     padding: 1.5rem 1rem;
+    background-color: #f0fbff;
   }
 
   /* Footer */
   footer {
     text-align: center;
     padding: 1.5rem 1rem;
+    background-color: #0077b6;
+    color: white;
   }
 
   .social-links a {
     display: inline-block;
     margin: 0.3rem;
+    color: white;
   }
 }
 
@@ -85,11 +92,11 @@
   left: -250px;
   width: 250px;
   height: 100vh;
-  background-color: #111;
+  background-color: #023047; /* fondo oscuro tipo azul profundo */
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* Centra verticalmente */
+  justify-content: center;
   padding: 0;
   transition: left 0.3s ease;
   z-index: 1000;
@@ -157,6 +164,8 @@
   padding: 2px 6px;
   font-size: 0.75rem;
 }
+
+/* Logo móvil */
 .logo {
   display: flex;
   align-items: center;
@@ -164,12 +173,12 @@
 }
 
 .logo-icon {
-  height: 40px; /* ajustalo si querés más grande o más chico */
+  height: 40px;
   width: auto;
 }
 
 .logo-text {
-  font-family: 'Poppins', sans-serif; /* o la fuente que estés usando */
+  font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
   color: white;
 }
