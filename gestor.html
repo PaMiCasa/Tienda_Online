@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Gestores</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="main-header">
+    <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
+  </header>
+
+  <main class="form-container">
+    <h2>Formulario para Gestores de Ventas</h2>
+    <form id="gestor-form">
+      <input type="text" id="name" placeholder="Nombre completo" required />
+      <input type="text" id="ci" placeholder="Carnet de identidad" required />
+      <input type="tel" id="phone" placeholder="Número de teléfono" required />
+      <button type="submit">Generar mi link</button>
+    </form>
+    <div id="result" style="margin-top: 20px;"></div>
+  </main>
+
+  <script src="gestor.js"></script>
+</body>
+</html>
