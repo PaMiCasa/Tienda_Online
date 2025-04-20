@@ -125,15 +125,20 @@ a {
 .features {
   display: flex;
   justify-content: space-around;
-  padding: 2rem;
-  background-color: #f0fbff;
+  align-items: center;
+  padding: 3rem 1rem;
+  background: url('img/features-banner.jpg') center/cover no-repeat;
+  color: #ffffff;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .feature {
   flex: 1;
-  padding: 1rem;
   font-size: 1.1rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* === Products === */
