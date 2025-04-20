@@ -14,30 +14,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderCart() {
-    if (!container || !totalContainer) return;
-
-    if (cart.length === 0) {
-      container.innerHTML = "<p>Your cart is empty.</p>";
-      totalContainer.innerHTML = "";
-      return;
-    }
-
-    let html = "<ul>";
-    let total = 0;
-
-    cart.forEach((item, index) => {
-      html += `
-        <li>
-          <strong>${item.name}</strong> - $${item.price.toFixed(2)}
-          <button onclick="removeItem(${index})">❌</button>
-        </li>`;
-      total += item.price;
-    });
-
-    html += "</ul>";
-    container.innerHTML = html;
-    totalContainer.innerHTML = `<p><strong>Total: $${total.toFixed(2)}</strong></p>`;
+  if (cartItems.length === 0) {
+    container.innerHTML = "<p>Your cart is empty.</p>";
+    totalContainer.innerHTML = "";
+    return;
   }
+
+  let html = "";
+  let total = 0;
+
+  cartItems.forEach((item, index) => {
+    const subtotal = item.precio * item.cantidad;
+    total += subtotal;
+
+    html += `
+      <div class="cart-item">
+        <img src="${item.imagen}" alt="${item.nombre}" class="cart-thumb"/>
+        <div class="cart-details">
+          <strong>${item.nombre}</strong>
+          <p>USD ${item.precio.toFixed(2)} x ${item.cantidad}</p>
+        </div>
+        <div class="cart-controls">
+          <button onclick="updateQuantity(${index}, -1)">➖</button>
+          <input type="text" value="${item.cantidad}" readonly />
+          <button onclick="updateQuantity(${index}, 1)">➕</button>
+          <button onclick="removeItem(${index})">🗑️</button>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+  totalContainer.innerHTML = `<p><strong>Total: $${total.toFixed(2)}</strong></p>`;
+}
+
+  window.updateQuantity = function(index, change) {
+  if (cartItems[index].cantidad + change >= 1) {
+    cartItems[index].cantidad += change;
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    renderCart();
+  }
+};
+
+window.removeItem = function(index) {
+  cartItems.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+  renderCart();
+};
+
 
   window.removeItem = function(index) {
     cart.splice(index, 1);
