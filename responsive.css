@@ -79,6 +79,10 @@
     width: 100%;
   }
 
+  .features {
+  position: relative; /* Necesario para el overlay */
+  }
+
   .cart-controls {
     justify-content: flex-start;
     width: 100%;
