@@ -30,13 +30,15 @@
   }
 
   /* Features */
-   .features {
+  .features {
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
     padding: 2rem 1rem;
     background: url('img/features-banner.jpg') center/cover no-repeat;
-    background-position: center;
     color: #ffffff;
+    position: relative;
+    overflow: hidden;
   }
 
   .features::before {
@@ -45,18 +47,18 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4); /* un poco más oscura para móvil */
+    background: rgba(0, 0, 0, 0.45); /* más oscura si querés más contraste */
     z-index: 0;
   }
 
   .features .feature {
     position: relative;
-    z-index: 2;
-    font-size: 1rem;
+    z-index: 1;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    font-size: 1.1rem;
     text-align: center;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   }
-}
+
   /* Products Grid */
   .product-grid {
     grid-template-columns: 1fr;
