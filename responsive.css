@@ -58,6 +58,11 @@
     font-size: 1.1rem;
     text-align: center;
   }
+  .features {
+  position: relative; /* IMPORTANTE */
+  z-index: 1;
+}
+
 
   /* Products Grid */
   .product-grid {
