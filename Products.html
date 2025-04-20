@@ -53,43 +53,57 @@
   <script src="cart.js"></script>
   <script src="location.js"></script>
   <script src="productos.js"></script>
-<script>
-  const container = document.getElementById("product-container");
+  <script>
+    const container = document.getElementById("product-container");
 
-  productos.forEach(prod => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    card.innerHTML = `
-  <img src="${prod.imagen}" alt="${prod.nombre}">
-  <h3>${prod.nombre}</h3>
-  <p>${prod.descripcion}</p>
-  <p><strong>$${prod.precio}</strong></p>
-  <button 
-    class="add-to-cart" 
-    data-name="${prod.nombre}" 
-    data-price="${prod.precio}">
-    Añadir al carrito
-  </button>
+    productos.forEach(prod => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${prod.imagen}" alt="${prod.nombre}">
+        <h3>${prod.nombre}</h3>
+        <p>${prod.descripcion}</p>
+        <p><strong>$${prod.precio}</strong></p>
+        <button 
+          class="add-to-cart" 
+          data-name="${prod.nombre}" 
+          data-price="${prod.precio}"
+          data-image="${prod.imagen}">
+          Añadir al carrito
+        </button>
+      `;
+      container.appendChild(card);
+    });
 
-`;
-    container.appendChild(card);
-  });
+    document.querySelectorAll(".add-to-cart").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const name = btn.dataset.name;
+        const price = parseFloat(btn.dataset.price);
+        const image = btn.dataset.image;
 
-  document.querySelectorAll(".add-to-cart").forEach(btn => {
-  btn.addEventListener("click", e => {
-    const id = parseInt(e.target.dataset.id);
-    const producto = productos.find(p => p.id === id);
-    
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    carrito.push(producto);
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    alert(`${producto.nombre} añadido al carrito ✅`);
-  });
-});
+        const existing = cart.find(item => item.nombre === name);
+        if (existing) {
+          existing.cantidad += 1;
+        } else {
+          cart.push({
+            nombre: name,
+            precio: price,
+            cantidad: 1,
+            imagen: image
+          });
+        }
 
-  
-</script>
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} añadido al carrito ✅`);
+      });
+    });
 
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
