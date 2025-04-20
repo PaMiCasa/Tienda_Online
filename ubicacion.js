@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const provinciaGuardada = localStorage.getItem("provincia");
+  const municipioGuardado = localStorage.getItem("municipio");
+
+  // Mostrar ubicación en el header si ya existe
+  function mostrarUbicacionEnHeader() {
+    const zona = document.getElementById("provincia-info");
+    if (provinciaGuardada && municipioGuardado && zona) {
+      zona.innerHTML = `📍 <strong>${municipioGuardado}, ${provinciaGuardada}</strong>`;
+    }
+  }
+
+  if (provinciaGuardada && municipioGuardado) {
+    mostrarUbicacionEnHeader();
+    return; // 🚫 No mostramos el modal
+  }
+
+  // Crear el modal solo si no están los datos guardados
   const modal = document.createElement("div");
   modal.className = "location-modal";
   modal.id = "locationModal";
@@ -29,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const artemisaMunicipios = [
     "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
-    "Candelaria", "Guanajay", "Güira de Melena", "Mariel", 
+    "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
     "San Antonio de los Baños", "San Cristóbal"
   ];
 
@@ -55,30 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("provincia", prov);
       localStorage.setItem("municipio", mun);
       modal.style.display = "none";
-      mostrarUbicacionEnHeader(); // ✅ Mostrar al momento de guardar
+      mostrarUbicacionEnHeader();
     } else {
       alert("Por favor seleccione ambos campos.");
     }
   });
 
-  // Mostrar modal solo si no está guardado
-  if (!localStorage.getItem("provincia") || !localStorage.getItem("municipio")) {
-    modal.style.display = "flex";
-  }
-
-  // Mostrar provincia y municipio en el header
-  function mostrarUbicacionEnHeader() {
-    const prov = localStorage.getItem("provincia");
-    const mun = localStorage.getItem("municipio");
-    const zona = document.getElementById("provincia-info");
-
-    if (prov && mun && zona) {
-      zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
-    }
-  }
-
-  // Ejecutarlo si ya están los datos
-  if (localStorage.getItem("provincia") && localStorage.getItem("municipio")) {
-    mostrarUbicacionEnHeader();
-  }
+  modal.style.display = "flex"; // Mostrar modal solo si no había datos guardados
 });
