@@ -17,15 +17,16 @@
   }
 
   /* Hero Section */
-  .hero h2 {
-    font-size: 1.8rem;
-    color: #0077b6;
+  .hero-banner {
+    height: 220px;
   }
 
-  .hero p {
+  .hero-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
     font-size: 1rem;
-    padding: 0 1rem;
-    color: #555;
   }
 
   /* Features */
@@ -124,7 +125,7 @@
   left: -250px;
   width: 250px;
   height: 100vh;
-  background-color: #024c64; /* azul del banner */
+  background-color: #024c64;
   color: white;
   display: flex;
   flex-direction: column;
