@@ -18,11 +18,11 @@
 
   /* Hero Section */
   .hero-banner {
-    height: 240px;
+    height: 300px;
   }
 
   .hero-text h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .hero-text p {
