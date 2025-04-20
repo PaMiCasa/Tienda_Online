@@ -75,50 +75,18 @@ a {
   font-size: 0.75rem;
 }
 
-/* === Hero === */
-.hero {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
+/* === Hero Banner === */
 .hero-banner {
-  position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: auto;
+  display: block;
 }
 
 .hero-banner img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #ffffff;
-  z-index: 10;
-  padding: 1rem 2rem;
-}
-
-.hero-text h2 {
-  font-size: 2.8rem;
-  margin-bottom: 1rem;
-  color: #cce7f6;
-}
-
-.hero-text p {
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #f5f5f5;
+  object-fit: cover;
 }
 
 /* === Features === */
@@ -205,7 +173,7 @@ a {
   background-color: #0096c7;
 }
 
-/* === Carrito === */
+/* === Cart === */
 .cart-item {
   display: flex;
   align-items: center;
@@ -297,7 +265,7 @@ footer {
   text-decoration: underline;
 }
 
-/* === Modal Provincia/Municipio === */
+/* === Provincia/Municipio Modal === */
 .location-modal {
   position: fixed;
   top: 50%;
@@ -401,15 +369,7 @@ footer {
   }
 
   .hero-banner {
-    height: 300px;
-  }
-
-  .hero-text h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
+    height: auto;
   }
 
   .features {
