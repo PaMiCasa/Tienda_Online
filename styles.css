@@ -427,13 +427,6 @@ footer {
   overflow: hidden;
 }
 
-.hero-banner {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.65); /* oscurece ligeramente la imagen */
-}
 
 .hero-text {
   position: absolute;
