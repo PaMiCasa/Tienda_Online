@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,6 +16,7 @@
 
     <!-- Botón menú + Carrito sobre el banner -->
     <div class="header-overlay">
+      <div id="provincia-info" class="provincia-info"></div>
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <a href="cart.html" class="cart-icon">
@@ -23,7 +24,7 @@
         </a>
       </div>
     </div>
-    
+
     <!-- Menú lateral -->
     <nav class="side-menu" id="sideMenu">
       <a href="#home">Home</a>
@@ -33,20 +34,19 @@
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </nav>
-
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
-      <!-- Texto provincia debajo de los botones pero sobre el banner -->
-    <div id="provincia-info" class="provincia-info"></div>
 
-<!-- HERO SECTION con banner -->
-<section class="hero" id="home">
-  <img src="img/hero-banner.jpg" alt="Bienvenido a PA' MI CASA" class="hero-banner">
-  <div class="hero-text">
-    <h2>Bienvenido a PA’ MI CASA</h2>
-    <p>Tu tienda online de confianza para el hogar 🏡</p>
-  </div>
-</section>
+  <!-- Sección de Bienvenida con Imagen de Fondo -->
+  <section class="hero">
+    <div class="hero-banner">
+      <img src="img/hero-banner.jpg" alt="Banner Cocina" />
+      <div class="hero-text">
+        <h2>Bienvenido a PA’ MI CASA</h2>
+        <p>Tu tienda online de confianza para el hogar 🏠</p>
+      </div>
+    </div>
+  </section>
 
   <!-- FEATURES -->
   <section class="features">
@@ -83,7 +83,7 @@
       <a href="#">Instagram</a> |
       <a href="#">WhatsApp</a>
     </div>
-    <p>© 2025 PA’ MI CASA. All rights reserved.</p>
+    <p>© 2025 PA’ MI CASA. Todos los derechos reservados.</p>
   </footer>
 
   <!-- SCRIPTS -->
@@ -92,6 +92,11 @@
   <script src="ubicacion.js"></script>
 
   <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const container = document.getElementById("cart-items");
