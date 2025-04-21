@@ -60,7 +60,7 @@ ${pedido}
 💸 Tipo de pago: ${payment}
 👤 Gestor: ${gestorNombre}`;
 
-      const url = `https://wa.me/5352930343?text=${encodeURIComponent(mensaje)}`;
+      const url = `https://wa.me/5354009985?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     });
   }
