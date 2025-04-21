@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const id = `${ci}-${Date.now()}`;
-    const link = `https://pamicasa.github.io/Tienda_Online/index.html?gestor=${encodeURIComponent(id)}`;
+    const link = `https://pamicasa.github.io/Tienda_Online/index.html?ref=${encodeURIComponent(id)}`;
     const gestorData = { nombre, ci, telefono, link };
 
     localStorage.setItem("gestor", JSON.stringify(gestorData));
