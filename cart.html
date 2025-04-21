@@ -125,7 +125,7 @@
     <p>© 2025 PA’ MI CASA. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- MODAL DE CHECKOUT -->
+
  <!-- MODAL DE CHECKOUT -->
 <div id="checkout-modal" class="checkout-modal" style="display:none;">
   <div class="checkout-content">
@@ -173,68 +173,7 @@
       document.getElementById("checkout-modal").style.display = "none";
     }
 
-    // Enviar pedido
-    <script>
-  // Abrir formulario
-  document.getElementById("checkout-btn").addEventListener("click", () => {
-    document.getElementById("checkout-modal").style.display = "block";
-  });
-
-  // Cerrar formulario
-  function closeCheckout() {
-    document.getElementById("checkout-modal").style.display = "none";
-  }
-
-  // Enviar datos a WhatsApp
-  document.getElementById("send-order").addEventListener("click", () => {
-    const name = document.getElementById("client-name").value.trim();
-    const phone = document.getElementById("client-phone").value.trim();
-    const address = document.getElementById("client-address").value.trim();
-    const payment = document.getElementById("payment-type").value;
-
-    const provincia = localStorage.getItem("provincia") || "";
-    const municipio = localStorage.getItem("municipio") || "";
-
-    const ref = localStorage.getItem("ref");
-
-    let gestorNombre = "Desconocido";
-
-    // Buscar nombre de gestor desde localStorage si existe
-    const gestores = JSON.parse(localStorage.getItem("gestores")) || [];
-    const gestorEncontrado = gestores.find(g => ref && g.link.includes(ref));
-    if (gestorEncontrado) {
-      gestorNombre = gestorEncontrado.nombre;
-    }
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-      alert("Tu carrito está vacío.");
-      return;
-    }
-
-    if (!name || !phone || !address) {
-      alert("Por favor completa todos los campos.");
-      return;
-    }
-
-    const pedido = cart.map(item => `- ${item.nombre} x${item.cantidad}`).join("\n");
-    const total = cart.reduce((sum, item) => sum + item.precio * item.cantidad, 0).toFixed(2);
-
-    const mensaje = `👨🏻👩🏻‍🦱Nombre del Cliente: ${name}
-📱 Número del Cliente: ${phone}
-🏠 Dirección: ${address}, ${municipio}, ${provincia}
-🛒 Pedido:
-${pedido}
-
-💰 Total: $${total}
-💸 Tipo de pago: ${payment}
-👤 Gestor: ${gestorNombre}`;
-
-    const url = `https://wa.me/5352930343?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
-  });
-</script>
-
+  
 
    
 </body>
