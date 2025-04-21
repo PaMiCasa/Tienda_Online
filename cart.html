@@ -1,20 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Cart - PA’ MI CASA</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="responsive.css" />
+  <style>
+    .checkout-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .checkout-content {
+      background: #e0f9ff;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkout-content h3 {
+      text-align: center;
+      color: #0077b6;
+      margin-bottom: 1.5rem;
+    }
+
+    .checkout-content label {
+      display: block;
+      margin: 0.8rem 0 0.3rem;
+      font-weight: 600;
+    }
+
+    .checkout-content input,
+    .checkout-content select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkout-content button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #send-order {
+      background-color: #00b4d8;
+      color: white;
+    }
+
+    #send-order:hover {
+      background-color: #0077b6;
+    }
+
+    .checkout-content button:last-child {
+      background: #ccc;
+    }
+
+    .checkout-content button:last-child:hover {
+      background: #999;
+    }
+  </style>
 </head>
 <body>
 
   <!-- HEADER CON BANNER -->
   <header class="main-header">
-    <!-- Banner superior -->
     <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
-
-    <!-- Iconos sobre el banner -->
     <div class="header-overlay">
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -24,7 +94,6 @@
       </div>
     </div>
 
-    <!-- Menú lateral -->
     <nav class="side-menu" id="sideMenu">
       <a href="index.html#home">Home</a>
       <a href="index.html#products">Products</a>
@@ -44,7 +113,6 @@
     <div id="cart-total" style="margin-bottom: 1rem;"></div>
     <button id="clear-cart">🗑️ Clear Cart</button>
     <button id="checkout-btn">✅ Procesar Pedido</button>
-
   </main>
 
   <!-- FOOTER -->
@@ -54,34 +122,56 @@
       <a href="#">Instagram</a> |
       <a href="#">WhatsApp</a>
     </div>
-    <p>© 2025 PA’ MI CASA. All rights reserved.</p>
+    <p>© 2025 PA’ MI CASA. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- MODAL DE CHECKOUT -->
+  <div id="checkout-modal" class="checkout-modal">
+    <div class="checkout-content">
+      <h3>Completa tus datos</h3>
+      <label>👨🏻👩🏻‍🦱 Nombre del Cliente:</label>
+      <input type="text" id="client-name" required />
+
+      <label>📱 Número del Cliente:</label>
+      <input type="tel" id="client-phone" required />
+
+      <label>🏠 Dirección:</label>
+      <input type="text" id="client-address" required />
+
+      <label>💸 Tipo de pago:</label>
+      <select id="payment-type">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia">Transferencia</option>
+        <option value="Contra entrega">Contra entrega</option>
+      </select>
+
+      <button id="send-order">📤 Enviar a WhatsApp</button>
+      <button onclick="closeCheckout()">❌ Cancelar</button>
+    </div>
+  </div>
 
   <!-- SCRIPTS -->
   <script src="main.js"></script>
   <script src="cart.js"></script>
+  <script src="ubicacion.js"></script>
+
   <script>
     function toggleMenu() {
       document.getElementById('sideMenu').classList.toggle('active');
       document.getElementById('overlay').classList.toggle('active');
     }
-  </script>
 
-    <!-- SCRIPT PARA PROCESAR PEDIDO -->
-  <script src="main.js"></script>
-  <script src="cart.js"></script>
-  <script src="ubicacion.js"></script>
-
-  <!-- 🚀 AQUI va el paso 3 -->
-  <script>
+    // Mostrar modal
     document.getElementById("checkout-btn").addEventListener("click", () => {
-      document.getElementById("checkout-modal").style.display = "block";
+      document.getElementById("checkout-modal").style.display = "flex";
     });
 
+    // Cerrar modal
     function closeCheckout() {
       document.getElementById("checkout-modal").style.display = "none";
     }
 
+    // Enviar pedido
     document.getElementById("send-order").addEventListener("click", () => {
       const name = document.getElementById("client-name").value.trim();
       const phone = document.getElementById("client-phone").value.trim();
@@ -112,38 +202,8 @@ ${pedido}
 
       const url = `https://wa.me/5352930343?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
+      closeCheckout();
     });
   </script>
-</body>
-</html>
-
-  
-  <!-- MODAL DE CHECKOUT -->
-<div id="checkout-modal" class="checkout-modal" style="display:none;">
-  <div class="checkout-content">
-    <h3>Completa tus datos</h3>
-    <label>👨🏻👩🏻‍🦱 Nombre del Cliente:</label>
-    <input type="text" id="client-name" required />
-
-    <label>📱 Número del Cliente:</label>
-    <input type="tel" id="client-phone" required />
-
-    <label>🏠 Dirección:</label>
-    <input type="text" id="client-address" required />
-
-    <label>💸 Tipo de pago:</label>
-    <select id="payment-type">
-      <option value="Efectivo">Efectivo</option>
-      <option value="Transferencia">Transferencia</option>
-      <option value="Contra entrega">Contra entrega</option>
-    </select>
-
-    <button id="send-order">📤 Enviar a WhatsApp</button>
-    <button onclick="closeCheckout()">❌ Cancelar</button>
-  </div>
-</div>
-
-
-  
 </body>
 </html>
