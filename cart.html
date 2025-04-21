@@ -195,7 +195,8 @@
     const provincia = localStorage.getItem("provincia") || "";
     const municipio = localStorage.getItem("municipio") || "";
 
-    const ref = new URLSearchParams(window.location.search).get("ref");
+    const ref = localStorage.getItem("ref");
+
     let gestorNombre = "Desconocido";
 
     // Buscar nombre de gestor desde localStorage si existe
