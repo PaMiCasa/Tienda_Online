@@ -1,23 +1,46 @@
-document.getElementById("gestor-form").addEventListener("submit", (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("gestor-form");
+  const resultDiv = document.getElementById("result");
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+  // Revisar si ya hay datos guardados
+  const gestorGuardado = JSON.parse(localStorage.getItem("gestor"));
 
-  if (!name || !email || !phone) {
-    alert("Por favor complete todos los campos");
-    return;
+  if (gestorGuardado && gestorGuardado.link) {
+    mostrarLink(gestorGuardado.link);
   }
 
-  const id = Date.now().toString(36); // ID simple para ejemplo
-  const refLink = `https://pamicasa.github.io/Tienda_Online/index.html?ref=${id}`;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  // Mostrar link generado
-  document.getElementById("result").innerHTML = `
-    <p><strong>Este es tu link de gestor:</strong></p>
-    <a href="${refLink}" target="_blank">${refLink}</a>
-  `;
+    const nombre = document.getElementById("name").value.trim();
+    const ci = document.getElementById("ci").value.trim();
+    const telefono = document.getElementById("phone").value.trim();
 
-  // Aquí podrías guardar los datos a backend o Google Sheets
+    if (!nombre || !ci || !telefono) {
+      alert("Por favor complete todos los campos");
+      return;
+    }
+
+    // Genera un ID único (puedes combinar CI + fecha + teléfono para hacerlo más único)
+    const id = `${ci}-${Date.now()}`;
+    const link = `https://pamicasa.github.io/Tienda_Online/index.html?gestor=${encodeURIComponent(id)}`;
+
+    // Guardar en localStorage
+    const gestorData = {
+      nombre,
+      ci,
+      telefono,
+      link
+    };
+
+    localStorage.setItem("gestor", JSON.stringify(gestorData));
+    mostrarLink(link);
+  });
+
+  function mostrarLink(link) {
+    resultDiv.innerHTML = `
+      <p><strong>Este es tu link de gestor:</strong></p>
+      <a href="${link}" target="_blank">${link}</a>
+    `;
+  }
 });
