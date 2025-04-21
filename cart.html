@@ -179,7 +179,7 @@
       const payment = document.getElementById("payment-type").value;
       const provincia = localStorage.getItem("provincia") || "";
       const municipio = localStorage.getItem("municipio") || "";
-      const gestorId = urlParams.get("gestor") || urlParams.get("ref") || "N/A";
+      const gestorId = new urlParams.get("gestor") || urlParams.get("ref") || "N/A";
 
 
 
