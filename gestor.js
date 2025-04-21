@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("gestor-form");
   const resultDiv = document.getElementById("result");
 
-  // Mostrar link si ya existe en localStorage
+  // Mostrar link si ya existe
   const gestorGuardado = JSON.parse(localStorage.getItem("gestor"));
   if (gestorGuardado && gestorGuardado.link) {
     form.style.display = "none";
@@ -25,7 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = `https://pamicasa.github.io/Tienda_Online/index.html?ref=${encodeURIComponent(id)}`;
     const gestorData = { nombre, ci, telefono, link };
 
+    // Guardar gestor actual
     localStorage.setItem("gestor", JSON.stringify(gestorData));
+
+    // Agregar a lista de gestores
+    const gestores = JSON.parse(localStorage.getItem("gestores")) || [];
+    gestores.push(gestorData);
+    localStorage.setItem("gestores", JSON.stringify(gestores));
+
     form.style.display = "none";
     mostrarLink(link);
   });
