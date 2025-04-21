@@ -43,6 +43,8 @@
     <div id="cart-items" style="margin-bottom: 1rem;"></div>
     <div id="cart-total" style="margin-bottom: 1rem;"></div>
     <button id="clear-cart">🗑️ Clear Cart</button>
+    <button id="checkout-btn">✅ Procesar Pedido</button>
+
   </main>
 
   <!-- FOOTER -->
@@ -64,5 +66,84 @@
       document.getElementById('overlay').classList.toggle('active');
     }
   </script>
+
+    <!-- SCRIPT PARA PROCESAR PEDIDO -->
+  <script src="main.js"></script>
+  <script src="cart.js"></script>
+  <script src="ubicacion.js"></script>
+
+  <!-- 🚀 AQUI va el paso 3 -->
+  <script>
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      document.getElementById("checkout-modal").style.display = "block";
+    });
+
+    function closeCheckout() {
+      document.getElementById("checkout-modal").style.display = "none";
+    }
+
+    document.getElementById("send-order").addEventListener("click", () => {
+      const name = document.getElementById("client-name").value.trim();
+      const phone = document.getElementById("client-phone").value.trim();
+      const address = document.getElementById("client-address").value.trim();
+      const payment = document.getElementById("payment-type").value;
+      const provincia = localStorage.getItem("provincia") || "";
+      const municipio = localStorage.getItem("municipio") || "";
+      const gestorId = new URLSearchParams(window.location.search).get("ref") || "N/A";
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const pedido = cart.map(item => `- ${item.nombre} x${item.cantidad}`).join('\n');
+      const total = cart.reduce((sum, item) => sum + item.precio * item.cantidad, 0).toFixed(2);
+
+      if (!name || !phone || !address) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      const mensaje = `👨🏻👩🏻‍🦱Nombre del Cliente: ${name}
+📱 Número del Cliente: ${phone}
+🏠 Dirección: ${address}, ${municipio}, ${provincia}
+🛒 Pedido:
+${pedido}
+
+💰 Total: $${total}
+💸 Tipo de pago: ${payment}
+👤 Gestor: ${gestorId}`;
+
+      const url = `https://wa.me/5352930343?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
+
+  
+  <!-- MODAL DE CHECKOUT -->
+<div id="checkout-modal" class="checkout-modal" style="display:none;">
+  <div class="checkout-content">
+    <h3>Completa tus datos</h3>
+    <label>👨🏻👩🏻‍🦱 Nombre del Cliente:</label>
+    <input type="text" id="client-name" required />
+
+    <label>📱 Número del Cliente:</label>
+    <input type="tel" id="client-phone" required />
+
+    <label>🏠 Dirección:</label>
+    <input type="text" id="client-address" required />
+
+    <label>💸 Tipo de pago:</label>
+    <select id="payment-type">
+      <option value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+      <option value="Contra entrega">Contra entrega</option>
+    </select>
+
+    <button id="send-order">📤 Enviar a WhatsApp</button>
+    <button onclick="closeCheckout()">❌ Cancelar</button>
+  </div>
+</div>
+
+
+  
 </body>
 </html>
