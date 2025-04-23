@@ -98,6 +98,24 @@
 
   <script src="gestor.js"></script>
   <script src="ref-manager.js"></script>
+  <script>
+  // Añadir ref=? al navegar por la tienda
+  document.addEventListener("DOMContentLoaded", () => {
+    const ref = localStorage.getItem("gestorRef");
+    if (!ref) return;
+
+    document.querySelectorAll("a[href]").forEach(link => {
+      const href = link.getAttribute("href");
+
+      // Solo enlaces internos y sin ref ya
+      if (href && !href.startsWith("http") && !href.includes("ref=")) {
+        const sep = href.includes("?") ? "&" : "?";
+        link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
