@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   // Abrir formulario
   const checkoutBtn = document.getElementById("checkout-btn");
@@ -25,11 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const provincia = localStorage.getItem("provincia") || "";
       const municipio = localStorage.getItem("municipio") || "";
 
-      // Obtener ref desde URL
-      const ref = new URLSearchParams(window.location.search).get("ref");
+      // Obtener el ref del gestor desde localStorage (ya guardado por ref-manager.js)
+      const ref = localStorage.getItem("gestorRef");
       let gestorNombre = "Desconocido";
 
-      // Buscar nombre de gestor desde localStorage si existe
       const gestores = JSON.parse(localStorage.getItem("gestores")) || [];
       const gestorEncontrado = gestores.find(g => ref && g.link.includes(ref));
       if (gestorEncontrado) {
