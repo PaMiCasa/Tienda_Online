@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Envia dinero a tus familiares! - PA’ MI CASA</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../responsive.css" />
   <style>
     .remesa-container {
       background-color: #e0f9ff;
@@ -57,7 +57,7 @@
 </head>
 <body>
 
-   <!-- HEADER -->
+  <!-- HEADER -->
   <header class="main-header">
     <!-- Banner -->
     <img src="../banner.jpg" alt="PA' MI CASA Banner" class="header-banner" />
@@ -67,7 +67,7 @@
       <div id="provincia-info" class="provincia-info"></div>
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <a href="cart.html" class="cart-icon">
+        <a href="../cart.html" class="cart-icon">
           🛒 <span id="cart-count">0</span>
         </a>
       </div>
@@ -75,19 +75,18 @@
 
     <!-- Menú lateral -->
     <nav class="side-menu" id="sideMenu">
-      <a href=../index.html>Home</a>
+      <a href="../index.html#home">Home</a>
       <a href="../Products.html">Productos</a>
       <a href="../gestor.html">Quiero ser Gestor</a>
-      <a href="#Global Imports">Global Imports</a>
-      <a href="remesas/remesas.html">Remesas</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
+      <a href="../global.html">Global Imports</a>
+      <a href="../remesas/remesas.html">Remesas</a>
+      <a href="../index.html#reviews">Reviews</a>
+      <a href="../index.html#contact">Contact</a>
     </nav>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
 
-
-  <!-- Formulario de Remesa -->
+  <!-- FORMULARIO DE REMESA -->
   <div class="remesa-container">
     <h2>Enviar Remesa</h2>
     <form id="remesa-form">
@@ -113,7 +112,13 @@
     </form>
   </div>
 
+  <!-- SCRIPTS -->
   <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
+
     document.getElementById("remesa-form").addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -134,5 +139,9 @@
     });
   </script>
 
+  <!-- Cart & Provincia count -->
+  <script src="../main.js"></script>
+  <script src="../ubicacion.js"></script>
+  <script src="../ref-manager.js"></script>
 </body>
 </html>
