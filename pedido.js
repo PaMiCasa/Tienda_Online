@@ -1,65 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Abrir formulario
-  const checkoutBtn = document.getElementById("checkout-btn");
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
-      document.getElementById("checkout-modal").style.display = "flex";
-    });
+  const form = document.getElementById("gestor-form");
+  const resultDiv = document.getElementById("result");
+
+  // Mostrar link si ya existe
+  const gestorGuardado = JSON.parse(localStorage.getItem("gestor"));
+  if (gestorGuardado && gestorGuardado.link) {
+    form.style.display = "none";
+    mostrarLink(gestorGuardado.link);
   }
 
-  // Cerrar modal
-  window.closeCheckout = function () {
-    document.getElementById("checkout-modal").style.display = "none";
-  };
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  // Enviar datos a WhatsApp
-  const sendOrderBtn = document.getElementById("send-order");
-  if (sendOrderBtn) {
-    sendOrderBtn.addEventListener("click", () => {
-      const name = document.getElementById("client-name").value.trim();
-      const phone = document.getElementById("client-phone").value.trim();
-      const address = document.getElementById("client-address").value.trim();
-      const payment = document.getElementById("payment-type").value;
+    const nombre = document.getElementById("name").value.trim();
+    const ci = document.getElementById("ci").value.trim();
+    const telefono = document.getElementById("phone").value.trim();
 
-      const provincia = localStorage.getItem("provincia") || "";
-      const municipio = localStorage.getItem("municipio") || "";
+    if (!nombre || !ci || !telefono) {
+      alert("Por favor complete todos los campos");
+      return;
+    }
 
-      // Obtener el ref del gestor desde localStorage (ya guardado por ref-manager.js)
-      const ref = localStorage.getItem("gestorRef");
-      let gestorNombre = "Desconocido";
+    const id = `${ci}-${Date.now()}`; // CI será usado como identificador de gestor
+    const link = `https://pamicasa.github.io/Tienda_Online/index.html?ref=${encodeURIComponent(id)}`;
+    const gestorData = { nombre, ci, telefono, link };
 
-      const gestores = JSON.parse(localStorage.getItem("gestores")) || [];
-      const gestorEncontrado = gestores.find(g => ref && g.link.includes(ref));
-      if (gestorEncontrado) {
-        gestorNombre = gestorEncontrado.nombre;
-      }
+    // Guardar solo para mostrar el link al gestor actual
+    localStorage.setItem("gestor", JSON.stringify(gestorData));
 
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      if (cart.length === 0) {
-        alert("Tu carrito está vacío.");
-        return;
-      }
+    form.style.display = "none";
+    mostrarLink(link);
+  });
 
-      if (!name || !phone || !address) {
-        alert("Por favor completa todos los campos.");
-        return;
-      }
+  function mostrarLink(link) {
+    resultDiv.innerHTML = `
+      <p><strong>Este es tu link de gestor:</strong></p>
+      <input type="text" id="linkField" value="${link}" readonly style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border-radius: 6px; border: 1px solid #ccc;" />
+      <button id="copyBtn" style="margin-top: 1rem; background: #0077b6; color: white; padding: 0.6rem 1rem; border: none; border-radius: 6px; cursor: pointer;">Copiar enlace</button>
+      <button id="resetBtn" style="margin-top: 1rem; background: #999; color: white; padding: 0.6rem 1rem; border: none; border-radius: 6px; cursor: pointer;">Volver a generar</button>
+    `;
 
-      const pedido = cart.map(item => `- ${item.nombre} x${item.cantidad}`).join("\n");
-      const total = cart.reduce((sum, item) => sum + item.precio * item.cantidad, 0).toFixed(2);
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      const input = document.getElementById("linkField");
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("¡Enlace copiado al portapapeles!");
+    });
 
-      const mensaje = `👨🏻👩🏻‍🦱Nombre del Cliente: ${name}
-📱 Número del Cliente: ${phone}
-🏠 Dirección: ${address}, ${municipio}, ${provincia}
-🛒 Pedido:
-${pedido}
-
-💰 Total: $${total}
-💸 Tipo de pago: ${payment}
-👤 Gestor: ${gestorNombre}`;
-
-      const url = `https://wa.me/5354009985?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      localStorage.removeItem("gestor");
+      form.reset();
+      form.style.display = "block";
+      resultDiv.innerHTML = "";
     });
   }
 });
