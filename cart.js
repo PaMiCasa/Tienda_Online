@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container) return;
 
     if (cart.length === 0) {
-      container.innerHTML = "<p>Your cart is empty.</p>";
+      container.innerHTML = "<p>Tu carrito está vacío.</p>";
       totalContainer.innerHTML = "";
       return;
     }
@@ -76,14 +76,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Añadir al carrito desde productos
+  // Añadir al carrito desde botones
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       const name = button.dataset.name;
       const price = parseFloat(button.dataset.price);
       const imagen = button.dataset.image || "placeholder.jpg";
 
-      // Revisar si ya existe el producto
       const existing = cart.find(p => p.nombre === name);
       if (existing) {
         existing.cantidad += 1;
@@ -93,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       localStorage.setItem("cart", JSON.stringify(cart));
       updateCartCount();
-      alert(`${name} añadido al carrito`);
+      alert(`${name} añadido al carrito ✅`);
     });
   });
 
