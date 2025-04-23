@@ -82,7 +82,7 @@
 </head>
 <body>
 
-  <!-- HEADER CON BANNER -->
+  <!-- HEADER -->
   <header class="main-header">
     <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
     <div class="header-overlay">
@@ -97,6 +97,7 @@
     <nav class="side-menu" id="sideMenu">
       <a href="index.html#home">Home</a>
       <a href="index.html#products">Products</a>
+      <a href="gestor.html">Quiero ser Gestor</a>
       <a href="index.html#deals">Deals</a>
       <a href="index.html#new">New</a>
       <a href="index.html#reviews">Reviews</a>
@@ -106,7 +107,7 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
 
-  <!-- CART SECTION -->
+  <!-- CART -->
   <main class="cart-section" style="padding: 2rem;">
     <h2>Your Cart</h2>
     <div id="cart-items" style="margin-bottom: 1rem;"></div>
@@ -125,32 +126,30 @@
     <p>© 2025 PA’ MI CASA. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- MODAL DE CHECKOUT -->
+  <div id="checkout-modal" class="checkout-modal">
+    <div class="checkout-content">
+      <h3>Completa tus datos</h3>
+      <label>👨🏻👩🏻‍🦱 Nombre del Cliente:</label>
+      <input type="text" id="client-name" required />
 
- <!-- MODAL DE CHECKOUT -->
-<div id="checkout-modal" class="checkout-modal" style="display:none;">
-  <div class="checkout-content">
-    <h3>Completa tus datos</h3>
-    <label>👨🏻👩🏻‍🦱 Nombre del Cliente:</label>
-    <input type="text" id="client-name" required />
+      <label>📱 Número del Cliente:</label>
+      <input type="tel" id="client-phone" required />
 
-    <label>📱 Número del Cliente:</label>
-    <input type="tel" id="client-phone" required />
+      <label>🏠 Dirección:</label>
+      <input type="text" id="client-address" required />
 
-    <label>🏠 Dirección:</label>
-    <input type="text" id="client-address" required />
+      <label>💸 Tipo de pago:</label>
+      <select id="payment-type">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia">Transferencia</option>
+        <option value="Contra entrega">Contra entrega</option>
+      </select>
 
-    <label>💸 Tipo de pago:</label>
-    <select id="payment-type">
-      <option value="Efectivo">Efectivo</option>
-      <option value="Transferencia">Transferencia</option>
-      <option value="Contra entrega">Contra entrega</option>
-    </select>
-
-    <button id="send-order">📤 Enviar a WhatsApp</button>
-    <button onclick="closeCheckout()">❌ Cancelar</button>
+      <button id="send-order">📤 Enviar a WhatsApp</button>
+      <button onclick="closeCheckout()">❌ Cancelar</button>
+    </div>
   </div>
-</div>
-
 
   <!-- SCRIPTS -->
   <script src="main.js"></script>
@@ -159,26 +158,20 @@
   <script src="pedido.js"></script>
   <script src="ref-manager.js"></script>
 
-
-
   <script>
     function toggleMenu() {
       document.getElementById('sideMenu').classList.toggle('active');
       document.getElementById('overlay').classList.toggle('active');
     }
 
-    // Mostrar modal
-    document.getElementById("checkout-btn").addEventListener("click", () => {
-      document.getElementById("checkout-modal").style.display = "flex";
-    });
-
-    // Cerrar modal
     function closeCheckout() {
       document.getElementById("checkout-modal").style.display = "none";
     }
 
-  
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      document.getElementById("checkout-modal").style.display = "flex";
+    });
+  </script>
 
-   
 </body>
 </html>
