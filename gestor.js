@@ -21,21 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const id = `${ci}-${Date.now()}`;
+    const id = `${ci}-${Date.now()}`; // CI será usado como identificador de gestor
     const link = `https://pamicasa.github.io/Tienda_Online/index.html?ref=${encodeURIComponent(id)}`;
     const gestorData = { nombre, ci, telefono, link };
 
-    // Guardar gestor actual
+    // Guardar solo para mostrar el link al gestor actual
     localStorage.setItem("gestor", JSON.stringify(gestorData));
-
-    // Agregar a lista de gestores sin duplicados
-    const gestores = JSON.parse(localStorage.getItem("gestores")) || [];
-
-    // Eliminar si ya existe un registro con la misma CI
-    const gestoresFiltrados = gestores.filter(g => g.ci !== ci);
-    gestoresFiltrados.push(gestorData);
-
-    localStorage.setItem("gestores", JSON.stringify(gestoresFiltrados));
 
     form.style.display = "none";
     mostrarLink(link);
