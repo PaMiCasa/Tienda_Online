@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enviar Remesa - PA’ MI CASA</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <style>
+    .remesa-container {
+      background-color: #e0f9ff;
+      padding: 2rem;
+      max-width: 500px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .remesa-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #0077b6;
+    }
+
+    .remesa-container label {
+      display: block;
+      font-weight: 600;
+      margin: 0.8rem 0 0.3rem;
+    }
+
+    .remesa-container input,
+    .remesa-container select {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .remesa-container button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #25d366;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .remesa-container button:hover {
+      background-color: #1ebc5a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <header class="main-header">
+    <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
+  </header>
+
+  <!-- Formulario de Remesa -->
+  <div class="remesa-container">
+    <h2>Enviar Remesa</h2>
+    <form id="remesa-form">
+      <label for="moneda">💱 Moneda:</label>
+      <select id="moneda" required>
+        <option value="">Seleccione</option>
+        <option value="USD">Dólar Americano (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="GBP">Libra Esterlina (GBP)</option>
+      </select>
+
+      <label for="cantidad">💵 Cantidad (mínimo 50):</label>
+      <input type="number" id="cantidad" min="50" required />
+
+      <label for="pago">💸 Tipo de pago:</label>
+      <select id="pago" required>
+        <option value="">Seleccione</option>
+        <option value="CUP">CUP</option>
+        <option value="MLC">MLC</option>
+      </select>
+
+      <button type="submit">📲 Enviar por WhatsApp</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("remesa-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const moneda = document.getElementById("moneda").value;
+      const cantidad = document.getElementById("cantidad").value;
+      const pago = document.getElementById("pago").value;
+
+      if (!moneda || !cantidad || cantidad < 50 || !pago) {
+        alert("Por favor complete todos los campos correctamente. Monto mínimo: 50.");
+        return;
+      }
+
+      const mensaje = `💸 *NUEVA SOLICITUD DE REMESA*\n\n💱 *Moneda:* ${moneda}\n💵 *Cantidad:* ${cantidad}\n💳 *Tipo de pago:* ${pago}`;
+      const numero = "5354009985";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+    });
+  </script>
+
+</body>
+</html>
