@@ -1,102 +1,90 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const provinciaInfo = document.getElementById("provincia-info");
-
   const provincia = localStorage.getItem("provincia");
   const municipio = localStorage.getItem("municipio");
 
-  // Renderizar texto en la burbuja
-  function renderBurbuja() {
-    if (provincia && municipio && provinciaInfo) {
-      provinciaInfo.innerHTML = `📍 <strong id="provincia-text">${municipio}, ${provincia}</strong>`;
-    } else if (provinciaInfo) {
-      provinciaInfo.innerHTML = `<strong id="provincia-text">Seleccionar ubicación</strong>`;
-    }
+  const zona = document.getElementById("provincia-info");
+  if (zona) {
+    zona.innerHTML = provincia && municipio 
+      ? `📍 <strong>${municipio}, ${provincia}</strong>` 
+      : `📍 <strong>Seleccionar ubicación</strong>`;
   }
 
-  // Crear modal de selección si no existe
-  function crearModal() {
-    if (document.getElementById("ubicacion-modal")) return; // Ya existe
-
+  // Crear modal si no existe
+  if (!document.getElementById("locationModal")) {
     const modal = document.createElement("div");
     modal.className = "location-modal";
-    modal.id = "ubicacion-modal";
-    modal.style.display = "none";
+    modal.id = "locationModal";
     modal.innerHTML = `
       <div class="modal-content">
         <h3>Seleccione su provincia</h3>
         <select id="province-select">
           <option value="">Seleccione una provincia</option>
           <option value="Artemisa">Artemisa</option>
-          <option value="La Habana">La Habana</option>
         </select>
 
-        <div id="municipality-container" style="display: none;">
-          <h3>Seleccione su municipio</h3>
-          <select id="municipality-select">
-            <option value="">Seleccione un municipio</option>
-          </select>
-        </div>
+        <h3>Seleccione su municipio</h3>
+        <select id="municipality-select">
+          <option value="">Seleccione un municipio</option>
+        </select>
 
         <button id="confirm-btn">Confirmar</button>
       </div>
     `;
     document.body.appendChild(modal);
+  }
 
-    const provinceSelect = document.getElementById("province-select");
-    const municipalitySelect = document.getElementById("municipality-select");
-    const municipalityContainer = document.getElementById("municipality-container");
+  const artemisaMunicipios = [
+    "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
+    "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
+    "San Antonio de los Baños", "San Cristóbal"
+  ];
 
-    const confirmBtn = document.getElementById("confirm-btn");
+  const modal = document.getElementById("locationModal");
+  const provinceSelect = document.getElementById("province-select");
+  const municipalitySelect = document.getElementById("municipality-select");
+  const confirmBtn = document.getElementById("confirm-btn");
 
-    const municipiosPorProvincia = {
-      "Artemisa": ["Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito", "Candelaria", "Guanajay", "Güira de Melena", "Mariel", "San Antonio de los Baños", "San Cristóbal"],
-      "La Habana": ["Playa", "Plaza", "Centro Habana", "Habana Vieja", "Diez de Octubre", "Arroyo Naranjo", "Boyeros", "Cerro", "La Lisa", "Marianao", "Regla", "Guanabacoa", "San Miguel", "Habana del Este"]
-    };
+  // Rellenar municipios al seleccionar provincia
+  provinceSelect.addEventListener("change", () => {
+    const prov = provinceSelect.value;
+    municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
+    if (prov === "Artemisa") {
+      artemisaMunicipios.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m;
+        opt.textContent = m;
+        municipalitySelect.appendChild(opt);
+      });
+    }
+  });
 
-    provinceSelect.addEventListener("change", () => {
-      const selectedProvince = provinceSelect.value;
-      if (municipiosPorProvincia[selectedProvince]) {
-        municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
-        municipiosPorProvincia[selectedProvince].forEach(m => {
-          const option = document.createElement("option");
-          option.value = option.textContent = m;
-          municipalitySelect.appendChild(option);
-        });
-        municipalityContainer.style.display = "block";
-      } else {
-        municipalityContainer.style.display = "none";
-      }
-    });
+  // Confirmar y guardar ubicación
+  confirmBtn.addEventListener("click", () => {
+    const prov = provinceSelect.value;
+    const mun = municipalitySelect.value;
+    if (!prov || !mun) {
+      alert("Por favor seleccione ambos campos.");
+      return;
+    }
 
-    confirmBtn.addEventListener("click", () => {
-      const prov = provinceSelect.value;
-      const mun = municipalitySelect.value;
-      if (prov && mun) {
-        localStorage.setItem("provincia", prov);
-        localStorage.setItem("municipio", mun);
-        modal.style.display = "none";
-        renderBurbuja();
-      } else {
-        alert("Por favor seleccione ambos campos.");
-      }
+    localStorage.setItem("provincia", prov);
+    localStorage.setItem("municipio", mun);
+    modal.style.display = "none";
+    if (zona) {
+      zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
+    }
+  });
+
+  // 👉 Hacer clickeable la burbuja de ubicación
+  if (zona) {
+    zona.style.cursor = "pointer";
+    zona.addEventListener("click", () => {
+      modal.style.display = "flex";
     });
   }
 
-  // Mostrar modal si no hay datos
+  // Mostrar modal si no había datos
   if (!provincia || !municipio) {
-    crearModal();
-    setTimeout(() => {
-      document.getElementById("ubicacion-modal").style.display = "flex";
-    }, 300);
+    modal.style.display = "flex";
   }
-
-  // Evento clic para abrir modal
-  if (provinciaInfo) {
-    provinciaInfo.addEventListener("click", () => {
-      crearModal();
-      document.getElementById("ubicacion-modal").style.display = "flex";
-    });
-  }
-
-  renderBurbuja();
 });
