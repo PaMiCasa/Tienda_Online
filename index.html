@@ -134,5 +134,26 @@
       }
     });
   </script>
+
+  <!-- MODAL DE SELECCIÓN DE UBICACIÓN -->
+<div id="ubicacion-modal" class="location-modal" style="display: none;">
+  <h3>Selecciona tu ubicación</h3>
+
+  <select id="select-provincia" required>
+    <option value="">Selecciona una provincia</option>
+    <option value="Artemisa">Artemisa</option>
+    <option value="La Habana">La Habana</option>
+    <option value="Mayabeque">Mayabeque</option>
+    <!-- Agrega más provincias si necesitas -->
+  </select>
+
+  <select id="select-municipio" required>
+    <option value="">Selecciona un municipio</option>
+    <!-- Se llenará dinámicamente -->
+  </select>
+
+  <button onclick="guardarUbicacion()">Confirmar</button>
+</div>
+
 </body>
 </html>
