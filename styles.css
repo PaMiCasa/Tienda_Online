@@ -265,18 +265,18 @@ footer {
   text-decoration: underline;
 }
 
-/* === Estilos del Modal de Ubicación - Uniforme === */
+//* === Estilo modal de ubicación (coherente con formularios previos) === */
 .location-modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 9999;
 }
 
 .location-modal .modal-content {
@@ -289,35 +289,36 @@ footer {
   text-align: center;
 }
 
-.location-modal h3 {
+.location-modal .modal-content h3 {
   color: #0077b6;
   margin-bottom: 1rem;
 }
 
-.location-modal select {
+.location-modal .modal-content select {
   width: 100%;
   padding: 0.6rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
-.location-modal button {
+.location-modal .modal-content button {
   width: 100%;
   padding: 0.8rem;
-  font-size: 1rem;
   background-color: #00b4d8;
   color: white;
   border: none;
+  font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
 }
 
-.location-modal button:hover {
+.location-modal .modal-content button:hover {
   background-color: #0077b6;
 }
+
 
 /* === Provincia Info === */
 .provincia-info {
