@@ -82,9 +82,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const cambiarBtn = document.getElementById("cambiar-ubicacion");
-  if (cambiarBtn) {
-    cambiarBtn.addEventListener("click", () => {
+  const provinciaText = document.getElementById("provincia-text");
+  const provinciaInfo = document.getElementById("provincia-info");
+
+  const provincia = localStorage.getItem("provincia");
+  const municipio = localStorage.getItem("municipio");
+
+  if (provincia && municipio) {
+    provinciaText.textContent = `${municipio}, ${provincia}`;
+  } else {
+    provinciaText.textContent = "Seleccionar ubicación";
+  }
+
+  // Al hacer clic en la burbuja de ubicación, mostrar modal
+  if (provinciaInfo) {
+    provinciaInfo.addEventListener("click", () => {
       const modal = document.getElementById("ubicacion-modal");
       if (modal) {
         modal.style.display = "block";
