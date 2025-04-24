@@ -80,3 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modal.style.display = "flex"; // Mostrar modal solo si no había datos guardados
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cambiarBtn = document.getElementById("cambiar-ubicacion");
+  if (cambiarBtn) {
+    cambiarBtn.addEventListener("click", () => {
+      const modal = document.getElementById("ubicacion-modal");
+      if (modal) {
+        modal.style.display = "block";
+      }
+    });
+  }
+});
+
