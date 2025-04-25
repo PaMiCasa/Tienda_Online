@@ -11,9 +11,12 @@
 
   <!-- HEADER -->
   <header class="main-header">
+    <!-- Banner -->
     <img src="banner.jpg" alt="PA' MI CASA Banner" class="header-banner" />
+
+    <!-- Botón menú + Carrito sobre el banner -->
     <div class="header-overlay">
-      <div id="provincia-info" class="provincia-info"></div>
+     <div id="provincia-info" class="provincia-info"></div>
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <a href="cart.html" class="cart-icon">
@@ -24,7 +27,7 @@
 
     <!-- Menú lateral -->
     <nav class="side-menu" id="sideMenu">
-      <a href="index.html">Home</a>
+      <a href=index.html>Home</a>
       <a href="Products.html">Productos</a>
       <a href="gestor.html">Quiero ser Gestor</a>
       <a href="#Global Imports">Global Imports</a>
@@ -35,10 +38,11 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
 
-  <!-- Banner de Bienvenida -->
-  <section class="hero-banner">
-    <img src="img/Bienvenido.jpg" alt="Bienvenida a PA MI CASA" class="full-banner-img">
-  </section>
+ <!-- Sección de Bienvenida con Banner completo -->
+<section class="hero-banner">
+  <img src="img/Bienvenido.jpg" alt="Bienvenida a PA MI CASA" class="full-banner-img">
+</section>
+
 
   <!-- FEATURES -->
   <section class="features">
@@ -51,9 +55,7 @@
   <section id="products" class="products">
     <h2>Featured Products</h2>
     <div class="filter-bar"></div>
-    <section id="product-container" class="product-grid">
-      <!-- Aquí se insertan los productos dinámicamente -->
-    </section>
+    <div class="product-grid" id="product-container"></div>
   </section>
 
   <!-- CART DISPLAY -->
@@ -85,74 +87,71 @@
   <script src="cart.js"></script>
   <script src="ubicacion.js"></script>
   <script src="ref-manager.js"></script>
-  <script src="productos.js"></script>
-
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const ref = localStorage.getItem("gestorRef");
-      if (!ref) return;
+  // Añadir ref=? al navegar por la tienda
+  document.addEventListener("DOMContentLoaded", () => {
+    const ref = localStorage.getItem("gestorRef");
+    if (!ref) return;
 
-      document.querySelectorAll("a[href]").forEach(link => {
-        const href = link.getAttribute("href");
-        if (href && !href.startsWith("http") && !href.includes("ref=")) {
-          const sep = href.includes("?") ? "&" : "?";
-          link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
-        }
-      });
+    document.querySelectorAll("a[href]").forEach(link => {
+      const href = link.getAttribute("href");
 
-      // Mostrar carrito
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const container = document.getElementById("cart-items");
-      if (container) {
-        container.innerHTML = cart.length === 0 
-          ? "<p>Your cart is empty.</p>" 
-          : "<ul>" + cart.map(item => `<li>${item.name} - $${item.price.toFixed(2)}</li>`).join('') + "</ul>";
+      // Solo enlaces internos y sin ref ya
+      if (href && !href.startsWith("http") && !href.includes("ref=")) {
+        const sep = href.includes("?") ? "&" : "?";
+        link.setAttribute("href", ${href}${sep}ref=${encodeURIComponent(ref)});
       }
     });
+  });
+</script>
 
+  <script src="productos.js"></script>
+
+
+  <script>
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("active");
       document.getElementById("overlay").classList.toggle("active");
     }
 
-    // 🔥 Cargar productos desde la API del bot
-    fetch("https://pamicasa-bot-production.up.railway.app/api/productos")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("product-container");
-        container.innerHTML = "";
+    document.addEventListener("DOMContentLoaded", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cart-items");
 
-        data.forEach(product => {
-          const card = document.createElement("div");
-          card.className = "product-card";
-          card.innerHTML = `
-            <img src="${product.imagen}" alt="${product.nombre}" style="width:100%;height:auto;">
-            <h3>${product.nombre}</h3>
-            <p><strong>$${product.precio}</strong></p>
-            <p>${product.descripcion}</p>
-          `;
-          container.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error("Error al cargar productos:", err);
-      });
+      if (container) {
+        if (cart.length === 0) {
+          container.innerHTML = "<p>Your cart is empty.</p>";
+        } else {
+          let html = "<ul>";
+          cart.forEach(item => {
+            html += <li>${item.name} - $${item.price.toFixed(2)}</li>;
+          });
+          html += "</ul>";
+          container.innerHTML = html;
+        }
+      }
+    });
   </script>
 
-  <!-- MODAL DE UBICACIÓN -->
-  <div id="ubicacion-modal" class="location-modal" style="display: none;">
-    <h3>Selecciona tu ubicación</h3>
-    <select id="select-provincia" required>
-      <option value="">Selecciona una provincia</option>
-      <option value="Artemisa">Artemisa</option>
-      <option value="La Habana">La Habana</option>
-      <option value="Mayabeque">Mayabeque</option>
-    </select>
-    <select id="select-municipio" required>
-      <option value="">Selecciona un municipio</option>
-    </select>
-    <button onclick="guardarUbicacion()">Confirmar</button>
-  </div>
+  <!-- MODAL DE SELECCIÓN DE UBICACIÓN -->
+<div id="ubicacion-modal" class="location-modal" style="display: none;">
+  <h3>Selecciona tu ubicación</h3>
+
+  <select id="select-provincia" required>
+    <option value="">Selecciona una provincia</option>
+    <option value="Artemisa">Artemisa</option>
+    <option value="La Habana">La Habana</option>
+    <option value="Mayabeque">Mayabeque</option>
+    <!-- Agrega más provincias si necesitas -->
+  </select>
+
+  <select id="select-municipio" required>
+    <option value="">Selecciona un municipio</option>
+    <!-- Se llenará dinámicamente -->
+  </select>
+
+  <button onclick="guardarUbicacion()">Confirmar</button>
+</div>
 
 </body>
 </html>
