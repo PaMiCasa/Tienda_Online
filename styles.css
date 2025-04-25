@@ -265,14 +265,14 @@ footer {
   text-decoration: underline;
 }
 
-//* === Estilo modal de ubicación (coherente con formularios previos) === */
+/* === Estilo modal de ubicación (coherente con formularios previos) === */
 .location-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* overlay oscuro */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,21 +289,31 @@ footer {
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-.location-modal select,
-.location-modal button {
+.location-modal h3 {
+  font-size: 1.3rem;
+  color: #0077b6;
+  margin-bottom: 1rem;
+}
+
+.location-modal select {
   width: 100%;
   padding: 0.6rem;
-  margin-top: 1rem;
   font-size: 1rem;
+  margin: 0.5rem 0 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 .location-modal button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
   background-color: #00b4d8;
   color: white;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .location-modal button:hover {
@@ -326,6 +336,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  cursor: pointer;
 }
 
 .provincia-info::before {
@@ -369,77 +380,4 @@ footer {
   .product-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* === Checkout Modal con Estilo === */
-.checkout-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.checkout-content {
-  background: #e0f9ff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.checkout-content h3 {
-  text-align: center;
-  color: #0077b6;
-  margin-bottom: 1.5rem;
-}
-
-.checkout-content label {
-  display: block;
-  margin: 0.8rem 0 0.3rem;
-  font-weight: 600;
-}
-
-.checkout-content input,
-.checkout-content select {
-  width: 100%;
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.checkout-content button {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-#send-order {
-  background-color: #00b4d8;
-  color: white;
-}
-
-#send-order:hover {
-  background-color: #0077b6;
-}
-
-.checkout-content button:last-child {
-  background: #ccc;
-}
-
-.checkout-content button:last-child:hover {
-  background: #999;
 }
