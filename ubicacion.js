@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
       : `📍 <strong>Seleccionar ubicación</strong>`;
   }
 
-  // Crear modal SOLO si no hay ubicación guardada
-  if ((!provincia || !municipio) && !document.getElementById("locationModal")) {
+  // Crear modal si no existe (¡siempre se crea!)
+  if (!document.getElementById("locationModal")) {
     const modal = document.createElement("div");
     modal.className = "location-modal";
     modal.id = "locationModal";
+    modal.style.display = "none"; // Oculto al inicio
     modal.innerHTML = `
       <div class="modal-content">
         <h3>Seleccione su provincia</h3>
@@ -38,11 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "San Antonio de los Baños", "San Cristóbal"
     ];
 
-    const provinceSelect = document.getElementById("province-select");
-    const municipalitySelect = document.getElementById("municipality-select");
-    const confirmBtn = document.getElementById("confirm-btn");
+    const provinceSelect = modal.querySelector("#province-select");
+    const municipalitySelect = modal.querySelector("#municipality-select");
+    const confirmBtn = modal.querySelector("#confirm-btn");
 
-    // Rellenar municipios al seleccionar provincia
     provinceSelect.addEventListener("change", () => {
       const prov = provinceSelect.value;
       municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Confirmar y guardar ubicación
     confirmBtn.addEventListener("click", () => {
       const prov = provinceSelect.value;
       const mun = municipalitySelect.value;
@@ -72,19 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
         zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
       }
     });
-
-    // Mostrar el modal al cargar si no hay datos guardados
-    modal.style.display = "flex";
   }
 
-  // Hacer clickeable la burbuja de ubicación para cambiar ubicación
+  // Mostrar modal si no había datos guardados
+  if (!provincia || !municipio) {
+    document.getElementById("locationModal").style.display = "flex";
+  }
+
+  // Hacer clickeable la burbuja de ubicación para cambiarla
   if (zona) {
     zona.style.cursor = "pointer";
     zona.addEventListener("click", () => {
       const modal = document.getElementById("locationModal");
-      if (modal) {
-        modal.style.display = "flex";
-      }
+      if (modal) modal.style.display = "flex";
     });
   }
 });
