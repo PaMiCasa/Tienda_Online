@@ -5,17 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const zona = document.getElementById("provincia-info");
   if (zona) {
     zona.innerHTML = provincia && municipio 
-      ? `📍 <strong>${municipio}, ${provincia}</strong>` 
-      : `📍 <strong>Seleccionar ubicación</strong>`;
+      ? 📍 <strong>${municipio}, ${provincia}</strong> 
+      : 📍 <strong>Seleccionar ubicación</strong>;
   }
 
-  // Crear modal si no existe (¡siempre se crea!)
+  // Crear modal si no existe
   if (!document.getElementById("locationModal")) {
     const modal = document.createElement("div");
     modal.className = "location-modal";
     modal.id = "locationModal";
-    modal.style.display = "none"; // Oculto al inicio
-    modal.innerHTML = `
+    modal.innerHTML = 
       <div class="modal-content">
         <h3>Seleccione su provincia</h3>
         <select id="province-select">
@@ -30,60 +29,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <button id="confirm-btn">Confirmar</button>
       </div>
-    `;
+    ;
     document.body.appendChild(modal);
-
-    const artemisaMunicipios = [
-      "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
-      "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
-      "San Antonio de los Baños", "San Cristóbal"
-    ];
-
-    const provinceSelect = modal.querySelector("#province-select");
-    const municipalitySelect = modal.querySelector("#municipality-select");
-    const confirmBtn = modal.querySelector("#confirm-btn");
-
-    provinceSelect.addEventListener("change", () => {
-      const prov = provinceSelect.value;
-      municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
-      if (prov === "Artemisa") {
-        artemisaMunicipios.forEach(m => {
-          const opt = document.createElement("option");
-          opt.value = m;
-          opt.textContent = m;
-          municipalitySelect.appendChild(opt);
-        });
-      }
-    });
-
-    confirmBtn.addEventListener("click", () => {
-      const prov = provinceSelect.value;
-      const mun = municipalitySelect.value;
-      if (!prov || !mun) {
-        alert("Por favor seleccione ambos campos.");
-        return;
-      }
-
-      localStorage.setItem("provincia", prov);
-      localStorage.setItem("municipio", mun);
-      modal.style.display = "none";
-      if (zona) {
-        zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
-      }
-    });
   }
 
-  // Mostrar modal si no había datos guardados
-  if (!provincia || !municipio) {
-    document.getElementById("locationModal").style.display = "flex";
-  }
+  const artemisaMunicipios = [
+    "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
+    "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
+    "San Antonio de los Baños", "San Cristóbal"
+  ];
 
-  // Hacer clickeable la burbuja de ubicación para cambiarla
+  const modal = document.getElementById("locationModal");
+  const provinceSelect = document.getElementById("province-select");
+  const municipalitySelect = document.getElementById("municipality-select");
+  const confirmBtn = document.getElementById("confirm-btn");
+
+  // Rellenar municipios al seleccionar provincia
+  provinceSelect.addEventListener("change", () => {
+    const prov = provinceSelect.value;
+    municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
+    if (prov === "Artemisa") {
+      artemisaMunicipios.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m;
+        opt.textContent = m;
+        municipalitySelect.appendChild(opt);
+      });
+    }
+  });
+
+  // Confirmar y guardar ubicación
+  confirmBtn.addEventListener("click", () => {
+    const prov = provinceSelect.value;
+    const mun = municipalitySelect.value;
+    if (!prov || !mun) {
+      alert("Por favor seleccione ambos campos.");
+      return;
+    }
+
+    localStorage.setItem("provincia", prov);
+    localStorage.setItem("municipio", mun);
+    modal.style.display = "none";
+    if (zona) {
+      zona.innerHTML = 📍 <strong>${mun}, ${prov}</strong>;
+    }
+  });
+
+  // 👉 Hacer clickeable la burbuja de ubicación
   if (zona) {
     zona.style.cursor = "pointer";
     zona.addEventListener("click", () => {
-      const modal = document.getElementById("locationModal");
-      if (modal) modal.style.display = "flex";
+      modal.style.display = "flex";
     });
+  }
+
+  // Mostrar modal si no había datos
+  if (!provincia || !municipio) {
+    modal.style.display = "flex";
   }
 });
