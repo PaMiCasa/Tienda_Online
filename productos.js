@@ -8,7 +8,11 @@ const productos = [
     imagen: "img/televisor.png",
     cantidad: 1
   }
-   {
+   
+];
+
+const productos = [
+{
     nombre: "Televisor de 32 pulgadas Milexus",
     descripcion: "Sistema Digital: ISDBT,Android 11,Bluetooth,HD Resolution 1080 x 758, smart tv alta definición.",
                   
@@ -16,5 +20,4 @@ const productos = [
     imagen: "img/Productos/milexus 32.jpg",
     cantidad: 1
   }
-  
-];
+  ];
