@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
       : `📍 <strong>Seleccionar ubicación</strong>`;
   }
 
-  // Crear modal si no existe
-  if (!document.getElementById("locationModal")) {
+  // Crear modal SOLO si no hay ubicación guardada
+  if ((!provincia || !municipio) && !document.getElementById("locationModal")) {
     const modal = document.createElement("div");
     modal.className = "location-modal";
     modal.id = "locationModal";
@@ -31,60 +31,60 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
     document.body.appendChild(modal);
+
+    const artemisaMunicipios = [
+      "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
+      "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
+      "San Antonio de los Baños", "San Cristóbal"
+    ];
+
+    const provinceSelect = document.getElementById("province-select");
+    const municipalitySelect = document.getElementById("municipality-select");
+    const confirmBtn = document.getElementById("confirm-btn");
+
+    // Rellenar municipios al seleccionar provincia
+    provinceSelect.addEventListener("change", () => {
+      const prov = provinceSelect.value;
+      municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
+      if (prov === "Artemisa") {
+        artemisaMunicipios.forEach(m => {
+          const opt = document.createElement("option");
+          opt.value = m;
+          opt.textContent = m;
+          municipalitySelect.appendChild(opt);
+        });
+      }
+    });
+
+    // Confirmar y guardar ubicación
+    confirmBtn.addEventListener("click", () => {
+      const prov = provinceSelect.value;
+      const mun = municipalitySelect.value;
+      if (!prov || !mun) {
+        alert("Por favor seleccione ambos campos.");
+        return;
+      }
+
+      localStorage.setItem("provincia", prov);
+      localStorage.setItem("municipio", mun);
+      modal.style.display = "none";
+      if (zona) {
+        zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
+      }
+    });
+
+    // Mostrar el modal al cargar si no hay datos guardados
+    modal.style.display = "flex";
   }
 
-  const artemisaMunicipios = [
-    "Alquízar", "Artemisa", "Bahía Honda", "Bauta", "Caimito",
-    "Candelaria", "Guanajay", "Güira de Melena", "Mariel",
-    "San Antonio de los Baños", "San Cristóbal"
-  ];
-
-  const modal = document.getElementById("locationModal");
-  const provinceSelect = document.getElementById("province-select");
-  const municipalitySelect = document.getElementById("municipality-select");
-  const confirmBtn = document.getElementById("confirm-btn");
-
-  // Rellenar municipios al seleccionar provincia
-  provinceSelect.addEventListener("change", () => {
-    const prov = provinceSelect.value;
-    municipalitySelect.innerHTML = '<option value="">Seleccione un municipio</option>';
-    if (prov === "Artemisa") {
-      artemisaMunicipios.forEach(m => {
-        const opt = document.createElement("option");
-        opt.value = m;
-        opt.textContent = m;
-        municipalitySelect.appendChild(opt);
-      });
-    }
-  });
-
-  // Confirmar y guardar ubicación
-  confirmBtn.addEventListener("click", () => {
-    const prov = provinceSelect.value;
-    const mun = municipalitySelect.value;
-    if (!prov || !mun) {
-      alert("Por favor seleccione ambos campos.");
-      return;
-    }
-
-    localStorage.setItem("provincia", prov);
-    localStorage.setItem("municipio", mun);
-    modal.style.display = "none";
-    if (zona) {
-      zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
-    }
-  });
-
-  // 👉 Hacer clickeable la burbuja de ubicación
+  // Hacer clickeable la burbuja de ubicación para cambiar ubicación
   if (zona) {
     zona.style.cursor = "pointer";
     zona.addEventListener("click", () => {
-      modal.style.display = "flex";
+      const modal = document.getElementById("locationModal");
+      if (modal) {
+        modal.style.display = "flex";
+      }
     });
-  }
-
-  // Mostrar modal si no había datos
-  if (!provincia || !municipio) {
-    modal.style.display = "flex";
   }
 });
