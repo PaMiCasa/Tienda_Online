@@ -130,8 +130,10 @@
   </script>
 
   <!-- MODAL DE SELECCIÓN DE UBICACIÓN -->
-  <div id="ubicacion-modal" class="location-modal" style="display: none;">
+ <div id="ubicacion-modal" class="location-modal" style="display: none;">
+  <div class="modal-content">
     <h3>Selecciona tu ubicación</h3>
+
     <select id="select-provincia" required>
       <option value="">Selecciona una provincia</option>
       <option value="Artemisa">Artemisa</option>
@@ -140,11 +142,12 @@
     </select>
 
     <select id="select-municipio" required>
-      <option value="">Selecciona un municipio</option>
+      <option value="">Seleccione un municipio</option>
     </select>
 
-    <button onclick="guardarUbicacion()">Confirmar</button>
+    <button id="confirm-btn">Confirmar</button>
   </div>
+</div>
 
 </body>
 </html>
