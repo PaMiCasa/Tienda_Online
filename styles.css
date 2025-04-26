@@ -264,8 +264,6 @@ footer {
 .social-links a:hover {
   text-decoration: underline;
 }
-
-/* === Estilo modal de ubicación (coherente con formularios previos) === */
 /* --- Estilos del Modal de Ubicación --- */
 .location-modal {
   display: none;
@@ -275,7 +273,7 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro transparente */
   justify-content: center;
   align-items: center;
 }
@@ -288,8 +286,8 @@ footer {
   max-width: 400px;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: column; /* 👉 Esto asegura vertical */
+  gap: 1rem; /* Espacio entre los elementos */
 }
 
 .location-modal h3 {
