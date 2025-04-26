@@ -71,60 +71,12 @@
       }
     });
   });
-</script>
+  </script>
+  
+  <script src="cargar-productos.js"></script>
+
 
   
-  <script>
-    const container = document.getElementById("product-container");
-
-    productos.forEach(prod => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `
-        <img src="${prod.imagen}" alt="${prod.nombre}">
-        <h3>${prod.nombre}</h3>
-        <p>${prod.descripcion}</p>
-        <p><strong>$${prod.precio}</strong></p>
-        <button 
-          class="add-to-cart" 
-          data-name="${prod.nombre}" 
-          data-price="${prod.precio}"
-          data-image="${prod.imagen}">
-          Añadir al carrito
-        </button>
-      `;
-      container.appendChild(card);
-    });
-
-    document.querySelectorAll(".add-to-cart").forEach(btn => {
-      btn.addEventListener("click", e => {
-        const name = btn.dataset.name;
-        const price = parseFloat(btn.dataset.price);
-        const image = btn.dataset.image;
-
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        const existing = cart.find(item => item.nombre === name);
-        if (existing) {
-          existing.cantidad += 1;
-        } else {
-          cart.push({
-            nombre: name,
-            precio: price,
-            cantidad: 1,
-            imagen: image
-          });
-        }
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`${name} añadido al carrito ✅`);
-      });
-    });
-
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("active");
-      document.getElementById("overlay").classList.toggle("active");
-    }
-  </script>
+  
 </body>
 </html>
