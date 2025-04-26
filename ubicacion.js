@@ -4,25 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const zona = document.getElementById("provincia-info");
 
-  if (zona) {
-    if (provincia && municipio) {
-      // ✅ Hay ubicación, OCULTAMOS la burbuja
-      zona.style.display = "none";
-    } else {
-      // ❌ No hay ubicación, MOSTRAMOS "Seleccionar ubicación"
-      zona.innerHTML = `📍 <strong>Seleccionar ubicación</strong>`;
-      zona.style.display = "inline-block";
-      zona.style.cursor = "pointer";
-
-      zona.addEventListener("click", () => {
-        const modal = document.getElementById("ubicacion-modal");
-        if (modal) {
-          modal.style.display = "flex";
-        }
-      });
-    }
-  }
-
   // Crear modal si no existe
   if (!document.getElementById("locationModal")) {
     const modal = document.createElement("div");
@@ -87,20 +68,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (zona) {
       zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
-      zona.style.display = "inline-block"; // mostrar la burbuja otra vez
+      zona.style.display = "inline-block";
     }
   });
 
-  // 👉 Hacer clickeable la burbuja de ubicación (de nuevo)
+  // Cargar estado inicial
   if (zona) {
+    if (provincia && municipio) {
+      zona.innerHTML = `📍 <strong>${municipio}, ${provincia}</strong>`;
+      zona.style.display = "inline-block";
+    } else {
+      zona.innerHTML = `📍 <strong>Seleccionar ubicación</strong>`;
+      zona.style.display = "inline-block";
+
+      // Mostrar modal automáticamente si no hay datos
+      if (modal) {
+        modal.style.display = "flex";
+      }
+    }
+
     zona.style.cursor = "pointer";
     zona.addEventListener("click", () => {
-      modal.style.display = "flex";
+      if (modal) {
+        modal.style.display = "flex";
+      }
     });
-  }
-
-  // Mostrar modal si no había datos
-  if (!provincia || !municipio) {
-    modal.style.display = "flex";
   }
 });
