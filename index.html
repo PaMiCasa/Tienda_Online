@@ -13,7 +13,6 @@
   <header class="main-header">
     <img src="img/banner.png" alt="PA' MI CASA Banner" class="header-banner" />
     <div class="header-overlay">
-      <div id="provincia-info" class="provincia-info">📍 <strong>Seleccionar ubicación</strong></div>
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <a href="cart.html" class="cart-icon">
@@ -83,7 +82,7 @@
   <script src="js/cart.js"></script>
   <script src="js/ubicacion.js"></script>
   <script src="js/ref-manager.js"></script>
-  <script src="js/cargar-productos.js"></script> <!-- Nuevo, para cargar productos -->
+  <script src="js/cargar-productos.js"></script>
 
   <script>
     function toggleMenu() {
@@ -92,7 +91,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Añadir ref=? al navegar
+      // Añadir ref=? al navegar por la tienda
       const ref = localStorage.getItem("gestorRef");
       if (ref) {
         document.querySelectorAll("a[href]").forEach(link => {
@@ -123,7 +122,7 @@
     });
   </script>
 
-  <!-- MODAL UBICACIÓN -->
+  <!-- MODAL DE SELECCIÓN DE UBICACIÓN -->
   <div id="ubicacion-modal" class="location-modal" style="display: none;">
     <h3>Selecciona tu ubicación</h3>
     <select id="select-provincia" required>
