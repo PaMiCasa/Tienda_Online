@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const municipio = localStorage.getItem("municipio");
 
   const zona = document.getElementById("provincia-info");
+
   if (zona) {
     if (provincia && municipio) {
       // ✅ Hay ubicación, OCULTAMOS la burbuja
@@ -21,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-});
 
   // Crear modal si no existe
   if (!document.getElementById("locationModal")) {
@@ -84,12 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("provincia", prov);
     localStorage.setItem("municipio", mun);
     modal.style.display = "none";
+
     if (zona) {
       zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
+      zona.style.display = "inline-block"; // mostrar la burbuja otra vez
     }
   });
 
-  // 👉 Hacer clickeable la burbuja de ubicación
+  // 👉 Hacer clickeable la burbuja de ubicación (de nuevo)
   if (zona) {
     zona.style.cursor = "pointer";
     zona.addEventListener("click", () => {
