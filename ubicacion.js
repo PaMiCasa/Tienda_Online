@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const zona = document.getElementById("provincia-info");
   if (zona) {
     zona.innerHTML = provincia && municipio 
-      ? 📍 <strong>${municipio}, ${provincia}</strong> 
-      : 📍 <strong>Seleccionar ubicación</strong>;
+      ? `📍 <strong>${municipio}, ${provincia}</strong>` 
+      : `📍 <strong>Seleccionar ubicación</strong>`;
   }
 
   // Crear modal si no existe
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.createElement("div");
     modal.className = "location-modal";
     modal.id = "locationModal";
-    modal.innerHTML = 
+    modal.innerHTML = `
       <div class="modal-content">
         <h3>Seleccione su provincia</h3>
         <select id="province-select">
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <button id="confirm-btn">Confirmar</button>
       </div>
-    ;
+    `;
     document.body.appendChild(modal);
   }
 
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("municipio", mun);
     modal.style.display = "none";
     if (zona) {
-      zona.innerHTML = 📍 <strong>${mun}, ${prov}</strong>;
+      zona.innerHTML = `📍 <strong>${mun}, ${prov}</strong>`;
     }
   });
 
