@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PA’ MI CASA</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
- <!-- HEADER -->
+  <!-- HEADER -->
   <header class="main-header">
-    <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
+    <img src="img/banner.png" alt="PA' MI CASA Banner" class="header-banner" />
     <div class="header-overlay">
+      <div id="provincia-info" class="provincia-info">📍 <strong>Seleccionar ubicación</strong></div>
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <a href="cart.html" class="cart-icon">
@@ -20,7 +21,7 @@
         </a>
       </div>
     </div>
-    
+
     <!-- Menú lateral -->
     <nav class="side-menu" id="sideMenu">
       <a href="index.html">Home</a>
@@ -33,12 +34,11 @@
     </nav>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
-  
- <!-- Sección de Bienvenida con Banner completo -->
-<section class="hero-banner">
-  <img src="img/Bienvenido.jpg" alt="Bienvenida a PA MI CASA" class="full-banner-img">
-</section>
 
+  <!-- Banner de Bienvenida -->
+  <section class="hero-banner">
+    <img src="img/Bienvenido.jpg" alt="Bienvenida a PA MI CASA" class="full-banner-img">
+  </section>
 
   <!-- FEATURES -->
   <section class="features">
@@ -79,28 +79,11 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script src="main.js"></script>
-  <script src="cart.js"></script>
-  <script src="ubicacion.js"></script>
-  <script src="ref-manager.js"></script>
-  <script>
-  // Añadir ref=? al navegar por la tienda
-  document.addEventListener("DOMContentLoaded", () => {
-    const ref = localStorage.getItem("gestorRef");
-    if (!ref) return;
-
-    document.querySelectorAll("a[href]").forEach(link => {
-      const href = link.getAttribute("href");
-
-      // Solo enlaces internos y sin ref ya
-      if (href && !href.startsWith("http") && !href.includes("ref=")) {
-        const sep = href.includes("?") ? "&" : "?";
-        link.setAttribute("href", ${href}${sep}ref=${encodeURIComponent(ref)});
-      }
-    });
-  });
-</script>
-
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ubicacion.js"></script>
+  <script src="js/ref-manager.js"></script>
+  <script src="js/cargar-productos.js"></script> <!-- Nuevo, para cargar productos -->
 
   <script>
     function toggleMenu() {
@@ -109,6 +92,19 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+      // Añadir ref=? al navegar
+      const ref = localStorage.getItem("gestorRef");
+      if (ref) {
+        document.querySelectorAll("a[href]").forEach(link => {
+          const href = link.getAttribute("href");
+          if (href && !href.startsWith("http") && !href.includes("ref=")) {
+            const sep = href.includes("?") ? "&" : "?";
+            link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
+          }
+        });
+      }
+
+      // Mostrar carrito
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const container = document.getElementById("cart-items");
 
@@ -118,7 +114,7 @@
         } else {
           let html = "<ul>";
           cart.forEach(item => {
-            html += <li>${item.name} - $${item.price.toFixed(2)}</li>;
+            html += `<li>${item.nombre} - $${item.precio.toFixed(2)}</li>`;
           });
           html += "</ul>";
           container.innerHTML = html;
@@ -127,25 +123,22 @@
     });
   </script>
 
-  <!-- MODAL DE SELECCIÓN DE UBICACIÓN -->
-<div id="ubicacion-modal" class="location-modal" style="display: none;">
-  <h3>Selecciona tu ubicación</h3>
+  <!-- MODAL UBICACIÓN -->
+  <div id="ubicacion-modal" class="location-modal" style="display: none;">
+    <h3>Selecciona tu ubicación</h3>
+    <select id="select-provincia" required>
+      <option value="">Selecciona una provincia</option>
+      <option value="Artemisa">Artemisa</option>
+      <option value="La Habana">La Habana</option>
+      <option value="Mayabeque">Mayabeque</option>
+    </select>
 
-  <select id="select-provincia" required>
-    <option value="">Selecciona una provincia</option>
-    <option value="Artemisa">Artemisa</option>
-    <option value="La Habana">La Habana</option>
-    <option value="Mayabeque">Mayabeque</option>
-    <!-- Agrega más provincias si necesitas -->
-  </select>
+    <select id="select-municipio" required>
+      <option value="">Selecciona un municipio</option>
+    </select>
 
-  <select id="select-municipio" required>
-    <option value="">Selecciona un municipio</option>
-    <!-- Se llenará dinámicamente -->
-  </select>
-
-  <button onclick="guardarUbicacion()">Confirmar</button>
-</div>
+    <button onclick="guardarUbicacion()">Confirmar</button>
+  </div>
 
 </body>
 </html>
