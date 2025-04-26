@@ -265,6 +265,7 @@ footer {
   text-decoration: underline;
 }
 /* --- Estilos del Modal de Ubicación --- */
+/* --- Estilos del Modal de Ubicación bonito --- */
 .location-modal {
   display: none;
   position: fixed;
@@ -273,50 +274,54 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro transparente */
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente */
   justify-content: center;
   align-items: center;
 }
 
 .location-modal .modal-content {
-  background: white;
+  background: #e0f7ff; /* Celeste clarito */
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 90%;
   max-width: 400px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra bonita */
   display: flex;
-  flex-direction: column; /* 👉 Esto asegura vertical */
-  gap: 1rem; /* Espacio entre los elementos */
+  flex-direction: column;
+  gap: 1.5rem; /* Más espacio entre campos */
 }
 
 .location-modal h3 {
   margin-bottom: 0.5rem;
-  color: #333;
-  font-size: 1.2rem;
+  color: #0077aa; /* Azul fuerte */
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .location-modal select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  background-color: white;
 }
 
 .location-modal button {
-  padding: 0.7rem;
-  background-color: #00aaff;
+  padding: 0.9rem;
+  background-color: #00b4d8;
   color: white;
   font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .location-modal button:hover {
-  background-color: #008ecc;
+  background-color: #0096c7;
 }
 
 
