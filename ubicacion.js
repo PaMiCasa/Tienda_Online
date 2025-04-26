@@ -4,10 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const zona = document.getElementById("provincia-info");
   if (zona) {
-    zona.innerHTML = provincia && municipio 
-      ? `📍 <strong>${municipio}, ${provincia}</strong>` 
-      : `📍 <strong>Seleccionar ubicación</strong>`;
+    if (provincia && municipio) {
+      // ✅ Hay ubicación, OCULTAMOS la burbuja
+      zona.style.display = "none";
+    } else {
+      // ❌ No hay ubicación, MOSTRAMOS "Seleccionar ubicación"
+      zona.innerHTML = `📍 <strong>Seleccionar ubicación</strong>`;
+      zona.style.display = "inline-block";
+      zona.style.cursor = "pointer";
+
+      zona.addEventListener("click", () => {
+        const modal = document.getElementById("ubicacion-modal");
+        if (modal) {
+          modal.style.display = "flex";
+        }
+      });
+    }
   }
+});
 
   // Crear modal si no existe
   if (!document.getElementById("locationModal")) {
