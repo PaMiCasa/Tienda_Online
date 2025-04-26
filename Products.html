@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Productos - PA’ MI CASA</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="main-header">
-    <img src="img/banner.png" alt="PA' MI CASA Banner" class="header-banner" />
+    <img src="banner.png" alt="PA' MI CASA Banner" class="header-banner" />
     <div class="header-overlay">
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -53,14 +53,13 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script src="js/main.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/ubicacion.js"></script>
-  <script src="js/ref-manager.js"></script>
-  <script src="js/cargar-productos.js"></script>
+  <script src="main.js"></script>
+  <script src="cart.js"></script>
+  <script src="ubicacion.js"></script>
+  <script src="ref-manager.js"></script>
 
   <script>
-    // Toggle menu para abrir/cerrar menú lateral
+    // Toggle menú
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("active");
       document.getElementById("overlay").classList.toggle("active");
@@ -82,6 +81,9 @@
       });
     });
   </script>
+
+  <!-- Script que carga los productos desde la API del bot -->
+  <script src="cargar-productos.js"></script>
 
 </body>
 </html>
