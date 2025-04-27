@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("category-container");
 
   try {
-    // 👉 Traer SOLO productos de Global Imports desde su propia API
+    // 1. Traer productos desde la API de Global Imports
     const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
     const productos = await res.json();
 
     const productosPorCategoria = {};
+
     productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
         productosPorCategoria[prod.categoria] = [];
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // Generar HTML
+    // 2. Generar HTML
     for (const categoria in productosPorCategoria) {
       const catTitle = document.createElement("h3");
       catTitle.textContent = categoria;
@@ -53,9 +54,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // Botones Carrito
+    // 3. Agregar evento a botones de "Añadir al carrito"
     document.querySelectorAll(".add-to-cart").forEach(btn => {
-      btn.addEventListener("click", e => {
+      btn.addEventListener("click", () => {
         const name = btn.dataset.name;
         const price = parseFloat(btn.dataset.price);
         const image = btn.dataset.image;
@@ -79,9 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // Botones Ver más
+    // 4. Agregar evento a botones de "Ver más"
     document.querySelectorAll(".ver-mas").forEach(btn => {
-      btn.addEventListener("click", e => {
+      btn.addEventListener("click", () => {
         const descripcion = decodeURIComponent(btn.dataset.descripcion);
         const nombre = decodeURIComponent(btn.dataset.nombre);
 
@@ -91,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // Cerrar modal
+    // 5. Cerrar modal
     document.getElementById("cerrar-modal").addEventListener("click", () => {
       document.getElementById("modal-descripcion").style.display = "none";
     });
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   } catch (error) {
-    console.error("Error al cargar productos globales:", error);
+    console.error("Error al cargar productos:", error);
     container.innerHTML = "<p>Error al cargar productos. Intenta más tarde.</p>";
   }
 });
