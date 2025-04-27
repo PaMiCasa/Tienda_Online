@@ -76,7 +76,7 @@
 
   <!-- HEADER -->
   <header class="main-header">
-   <img src="banner.jpg" alt="Banner de la tienda" class="form-banner">
+    <img src="banner.jpg" alt="Banner de la tienda" class="form-banner">
     <div class="header-overlay">
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -96,7 +96,11 @@
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </nav>
- 
+
+    <!-- Overlay para el menú lateral -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+  </header>
+
   <!-- Formulario -->
   <div class="gestor-form-container">
     <h2>Formulario para Gestores de Ventas</h2>
@@ -116,28 +120,29 @@
     <div id="result"></div>
   </div>
 
+  <!-- Scripts -->
   <script src="gestor.js"></script>
   <script src="ref-manager.js"></script>
   <script>
-  // Añadir ref=? al navegar por la tienda
-  document.addEventListener("DOMContentLoaded", () => {
-    const ref = localStorage.getItem("gestorRef");
-    if (!ref) return;
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
 
-    document.querySelectorAll("a[href]").forEach(link => {
-      const href = link.getAttribute("href");
+    document.addEventListener("DOMContentLoaded", () => {
+      const ref = localStorage.getItem("gestorRef");
+      if (!ref) return;
 
-      // Solo enlaces internos y sin ref ya
-      if (href && !href.startsWith("http") && !href.includes("ref=")) {
-        const sep = href.includes("?") ? "&" : "?";
-        link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
-      }
+      document.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+
+        if (href && !href.startsWith("http") && !href.includes("ref=")) {
+          const sep = href.includes("?") ? "&" : "?";
+          link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
+        }
+      });
     });
-  });
-</script>
-
-  
-
+  </script>
 
 </body>
 </html>
