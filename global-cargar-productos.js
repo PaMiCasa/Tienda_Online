@@ -4,30 +4,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("category-container");
 
   try {
-    // 1. Traer productos desde la API
-    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos");
+    // 👉 Traer SOLO productos de Global Imports desde su propia API
+    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
     const productos = await res.json();
 
-    // 👉 Filtrar SOLO los de origen "global"
-    const productosGlobales = productos.filter(prod => prod.origen === "global");
-
     const productosPorCategoria = {};
-    productosGlobales.forEach(prod => {
+    productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
         productosPorCategoria[prod.categoria] = [];
       }
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // 2. Generar HTML
+    // Generar HTML
     for (const categoria in productosPorCategoria) {
-      // Crear título de categoría
       const catTitle = document.createElement("h3");
       catTitle.textContent = categoria;
       catTitle.className = "categoria-title";
       container.appendChild(catTitle);
 
-      // Crear grid de productos
       const grid = document.createElement("div");
       grid.className = "product-grid";
 
@@ -58,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // 3. Agregar eventos a botones de carrito
+    // Botones Carrito
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", e => {
         const name = btn.dataset.name;
@@ -84,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // 4. Agregar eventos a botones de "Ver más"
+    // Botones Ver más
     document.querySelectorAll(".ver-mas").forEach(btn => {
       btn.addEventListener("click", e => {
         const descripcion = decodeURIComponent(btn.dataset.descripcion);
@@ -96,12 +91,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // 5. Cerrar modal
+    // Cerrar modal
     document.getElementById("cerrar-modal").addEventListener("click", () => {
       document.getElementById("modal-descripcion").style.display = "none";
     });
 
-    // Opcional: cerrar modal haciendo click fuera
     document.getElementById("modal-descripcion").addEventListener("click", (e) => {
       if (e.target.id === "modal-descripcion") {
         document.getElementById("modal-descripcion").style.display = "none";
