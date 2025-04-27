@@ -286,3 +286,24 @@
   font-size: 1.8rem;
   color: white;
 }
+  .global-imports-container {
+    padding: 1.5rem 1rem;
+    margin: 1.5rem auto;
+  }
+
+  .global-imports-container h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .global-imports-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .form-banner {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
