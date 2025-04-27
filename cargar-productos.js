@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos");
     const productos = await res.json();
 
-    // 2. Agrupar productos por categoría
     const productosPorCategoria = {};
     productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // 3. Generar HTML
+    // 2. Generar HTML
     for (const categoria in productosPorCategoria) {
       // Crear título de categoría
       const catTitle = document.createElement("h3");
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.innerHTML = `
           <img src="${prod.imagen}" alt="${prod.nombre}">
           <h3>${prod.nombre}</h3>
-          <p>${prod.descripcion}</p>
           <p><strong>$${prod.precio}</strong></p>
           <button 
             class="add-to-cart" 
@@ -46,6 +44,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           >
             Añadir al carrito
           </button>
+          <button class="ver-mas" data-descripcion="${encodeURIComponent(prod.descripcion)}" data-nombre="${encodeURIComponent(prod.nombre)}">
+            Ver más
+          </button>
         `;
 
         grid.appendChild(card);
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // 4. Agregar eventos a botones de carrito
+    // 3. Agregar eventos a botones de carrito
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", e => {
         const name = btn.dataset.name;
@@ -78,6 +79,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         localStorage.setItem("cart", JSON.stringify(cart));
         alert(`${name} añadido al carrito ✅`);
       });
+    });
+
+    // 4. Agregar eventos a botones de "Ver más"
+    document.querySelectorAll(".ver-mas").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const descripcion = decodeURIComponent(btn.dataset.descripcion);
+        const nombre = decodeURIComponent(btn.dataset.nombre);
+
+        document.getElementById("modal-nombre").innerText = nombre;
+        document.getElementById("modal-descripcion-texto").innerText = descripcion;
+        document.getElementById("modal-descripcion").style.display = "flex";
+      });
+    });
+
+    // 5. Cerrar modal
+    document.getElementById("cerrar-modal").addEventListener("click", () => {
+      document.getElementById("modal-descripcion").style.display = "none";
+    });
+
+    // Opcional: cerrar modal haciendo click fuera
+    document.getElementById("modal-descripcion").addEventListener("click", (e) => {
+      if (e.target.id === "modal-descripcion") {
+        document.getElementById("modal-descripcion").style.display = "none";
+      }
     });
 
   } catch (error) {
