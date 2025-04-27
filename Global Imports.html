@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Global Imports - PA' MI CASA</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="responsive.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Imports</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -29,17 +29,19 @@
       <a href="global-imports.html">Global Imports</a>
       <a href="remesas/remesas.html">Remesas</a>
       <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
+      <a href="#contact">Contacto</a>
     </nav>
-
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="global-imports-container">
-    <h1>Bienvenido a Global Imports</h1>
-    <p>Aquí muy pronto podrás solicitar tus productos internacionales favoritos.</p>
-  </main>
+  <!-- SOBRE NOSOTROS -->
+  <section class="global-imports-container">
+    <h1>Sobre Global Imports</h1>
+    <p>
+      En Global Imports nos encargamos de encontrar, cotizar y traer cualquier producto que necesites de tiendas como Amazon, Aliexpress, Temu, Shein y muchas más, entregándolo directamente en tu hogar. <br><br>
+      Nos especializamos en darte un servicio personalizado, rápido y seguro, asegurando calidad en cada pedido que realizas con nosotros. 
+    </p>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -48,33 +50,9 @@
       <a href="#">Instagram</a> |
       <a href="#">WhatsApp</a>
     </div>
-    <p>© 2025 PA’ MI CASA. Todos los derechos reservados.</p>
+    <p>© 2025 Global Imports. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPTS -->
   <script src="main.js"></script>
-  <script src="cart.js"></script>
-  <script src="ref-manager.js"></script>
-  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("active");
-      document.getElementById("overlay").classList.toggle("active");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const ref = localStorage.getItem("gestorRef");
-      if (!ref) return;
-
-      document.querySelectorAll("a[href]").forEach(link => {
-        const href = link.getAttribute("href");
-        if (href && !href.startsWith("http") && !href.includes("ref=")) {
-          const sep = href.includes("?") ? "&" : "?";
-          link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
-        }
-      });
-    });
-  </script>
-
 </body>
 </html>
-
