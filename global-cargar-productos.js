@@ -1,39 +1,32 @@
-// cargar-productos-global.js
-
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("category-container");
 
   try {
-    // 1. Traer productos desde la API
-    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
+    // Traer productos SOLO de Global Imports
+    const res = await fetch("/api/productos-global");
     const productos = await res.json();
 
-    // 2. Filtrar solo los productos de "Global Imports"
-    const productosGlobal = productos.filter(prod => prod.origen === "global");
-
-    if (productosGlobal.length === 0) {
-      container.innerHTML = "<p>No hay productos disponibles actualmente en Global Imports.</p>";
+    if (productos.length === 0) {
+      container.innerHTML = "<p>No hay productos disponibles en Global Imports.</p>";
       return;
     }
 
-    // 3. Agrupar productos por categoría
+    // Agrupar por categoría
     const productosPorCategoria = {};
-    productosGlobal.forEach(prod => {
+    productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
         productosPorCategoria[prod.categoria] = [];
       }
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // 4. Generar HTML
+    // Crear tarjetas
     for (const categoria in productosPorCategoria) {
-      // Crear título de categoría
       const catTitle = document.createElement("h3");
       catTitle.textContent = categoria;
       catTitle.className = "categoria-title";
       container.appendChild(catTitle);
 
-      // Crear grid de productos
       const grid = document.createElement("div");
       grid.className = "product-grid";
 
@@ -45,15 +38,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           <img src="${prod.imagen}" alt="${prod.nombre}">
           <h3>${prod.nombre}</h3>
           <p><strong>$${prod.precio}</strong></p>
-          <button 
-            class="add-to-cart" 
-            data-name="${prod.nombre}" 
+          <button class="add-to-cart"
+            data-name="${prod.nombre}"
             data-price="${prod.precio}"
-            data-image="${prod.imagen}"
-          >
+            data-image="${prod.imagen}">
             Añadir al carrito
           </button>
-          <button class="ver-mas" data-descripcion="${encodeURIComponent(prod.descripcion)}" data-nombre="${encodeURIComponent(prod.nombre)}">
+          <button class="ver-mas"
+            data-descripcion="${encodeURIComponent(prod.descripcion)}"
+            data-nombre="${encodeURIComponent(prod.nombre)}">
             Ver más
           </button>
         `;
@@ -64,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // 5. Agregar eventos a botones
+    // Botón Añadir al carrito
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", () => {
         const name = btn.dataset.name;
@@ -77,12 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (existing) {
           existing.cantidad += 1;
         } else {
-          cart.push({
-            nombre: name,
-            precio: price,
-            cantidad: 1,
-            imagen: image
-          });
+          cart.push({ nombre: name, precio: price, cantidad: 1, imagen: image });
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -90,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
+    // Botón Ver más
     document.querySelectorAll(".ver-mas").forEach(btn => {
       btn.addEventListener("click", () => {
         const descripcion = decodeURIComponent(btn.dataset.descripcion);
