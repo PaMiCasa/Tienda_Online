@@ -73,10 +73,30 @@
   </style>
 </head>
 <body>
+ <!-- HEADER -->
+  <header class="main-header">
+   <img src="banner.png" alt="Banner de la tienda" class="form-banner">
+    <div class="header-overlay">
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <a href="cart.html" class="cart-icon">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
 
-  <!-- Banner -->
-  <img src="banner.png" alt="Banner de la tienda" class="form-banner">
+    <!-- Menú lateral -->
+    <nav class="side-menu" id="sideMenu">
+      <a href="index.html">Home</a>
+      <a href="Products.html">Productos</a>
+      <a href="gestor.html">Quiero ser Gestor</a>
+      <a href="#Global Imports">Global Imports</a>
+      <a href="remesas/remesas.html">Remesas</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
+ 
   <!-- Formulario -->
   <div class="gestor-form-container">
     <h2>Formulario para Gestores de Ventas</h2>
