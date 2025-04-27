@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("category-container");
 
   try {
-    // 1. Traer productos desde la API de Global Imports
+    // 1. Traer productos de Global Imports desde la API correcta
     const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
     const productos = await res.json();
 
     const productosPorCategoria = {};
-
     productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
         productosPorCategoria[prod.categoria] = [];
@@ -17,13 +16,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // 2. Generar HTML
+    // 2. Generar HTML dinámico
     for (const categoria in productosPorCategoria) {
+      // Crear título de categoría
       const catTitle = document.createElement("h3");
       catTitle.textContent = categoria;
       catTitle.className = "categoria-title";
       container.appendChild(catTitle);
 
+      // Crear grid de productos
       const grid = document.createElement("div");
       grid.className = "product-grid";
 
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // 3. Agregar evento a botones de "Añadir al carrito"
+    // 3. Agregar eventos a botones de carrito
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", () => {
         const name = btn.dataset.name;
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // 4. Agregar evento a botones de "Ver más"
+    // 4. Agregar eventos para mostrar "Ver más" (Modal)
     document.querySelectorAll(".ver-mas").forEach(btn => {
       btn.addEventListener("click", () => {
         const descripcion = decodeURIComponent(btn.dataset.descripcion);
@@ -97,6 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("modal-descripcion").style.display = "none";
     });
 
+    // Cerrar modal al hacer click fuera
     document.getElementById("modal-descripcion").addEventListener("click", (e) => {
       if (e.target.id === "modal-descripcion") {
         document.getElementById("modal-descripcion").style.display = "none";
