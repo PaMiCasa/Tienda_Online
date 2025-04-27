@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 2. Filtrar solo los productos que tengan origen "global"
     const productosGlobal = productos.filter(prod => prod.origen === "global");
 
+
     const productosPorCategoria = {};
     productosGlobal.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
