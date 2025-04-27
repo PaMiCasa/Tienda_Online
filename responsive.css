@@ -65,15 +65,19 @@
     text-align: center;
   }
 
-  /* Products Grid */
-  .product-grid {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
+/* Products Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 🛠️ Ahora dos productos por fila */
+  gap: 1rem;
+  padding: 1rem;
+}
 
-  .product-card img {
-    max-height: 160px;
-  }
+.product-card img {
+  max-height: 160px;
+  width: 100%;
+  object-fit: cover;
+}
 
   /* Cart Items */
   .cart-item {
