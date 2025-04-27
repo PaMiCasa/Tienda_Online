@@ -1,17 +1,12 @@
+// cargar-global.js
+
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("category-container");
 
   try {
-    // Traer productos SOLO de Global Imports
-    const res = await fetch("/api/productos-global");
+    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
     const productos = await res.json();
 
-    if (productos.length === 0) {
-      container.innerHTML = "<p>No hay productos disponibles en Global Imports.</p>";
-      return;
-    }
-
-    // Agrupar por categoría
     const productosPorCategoria = {};
     productos.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
@@ -20,7 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       productosPorCategoria[prod.categoria].push(prod);
     });
 
-    // Crear tarjetas
     for (const categoria in productosPorCategoria) {
       const catTitle = document.createElement("h3");
       catTitle.textContent = categoria;
@@ -38,15 +32,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           <img src="${prod.imagen}" alt="${prod.nombre}">
           <h3>${prod.nombre}</h3>
           <p><strong>$${prod.precio}</strong></p>
-          <button class="add-to-cart"
-            data-name="${prod.nombre}"
+          <button 
+            class="add-to-cart" 
+            data-name="${prod.nombre}" 
             data-price="${prod.precio}"
-            data-image="${prod.imagen}">
+            data-image="${prod.imagen}"
+          >
             Añadir al carrito
           </button>
-          <button class="ver-mas"
-            data-descripcion="${encodeURIComponent(prod.descripcion)}"
-            data-nombre="${encodeURIComponent(prod.nombre)}">
+          <button class="ver-mas" data-descripcion="${encodeURIComponent(prod.descripcion)}" data-nombre="${encodeURIComponent(prod.nombre)}">
             Ver más
           </button>
         `;
@@ -57,9 +51,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(grid);
     }
 
-    // Botón Añadir al carrito
+    // Eventos carrito
     document.querySelectorAll(".add-to-cart").forEach(btn => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", e => {
         const name = btn.dataset.name;
         const price = parseFloat(btn.dataset.price);
         const image = btn.dataset.image;
@@ -70,7 +64,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (existing) {
           existing.cantidad += 1;
         } else {
-          cart.push({ nombre: name, precio: price, cantidad: 1, imagen: image });
+          cart.push({
+            nombre: name,
+            precio: price,
+            cantidad: 1,
+            imagen: image
+          });
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -78,9 +77,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    // Botón Ver más
+    // Eventos ver más
     document.querySelectorAll(".ver-mas").forEach(btn => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", e => {
         const descripcion = decodeURIComponent(btn.dataset.descripcion);
         const nombre = decodeURIComponent(btn.dataset.nombre);
 
