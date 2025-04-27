@@ -112,6 +112,29 @@
   <script src="ubicacion.js"></script>
   <script src="ref-manager.js"></script>
   <script src="cargar-global.js"></script> <!-- ✅ Archivo correcto -->
+   <script>
+    // Toggle menú
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
+
+    // Añadir ref=? al navegar por la tienda
+    document.addEventListener("DOMContentLoaded", () => {
+      const ref = localStorage.getItem("gestorRef");
+      if (!ref) return;
+
+      document.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+
+        // Solo enlaces internos y sin ref ya
+        if (href && !href.startsWith("http") && !href.includes("ref=")) {
+          const sep = href.includes("?") ? "&" : "?";
+          link.setAttribute("href", `${href}${sep}ref=${encodeURIComponent(ref)}`);
+        }
+      });
+    });
+  </script>
   
 </body>
 </html>
