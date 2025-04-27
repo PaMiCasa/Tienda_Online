@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // 1. Traer productos desde la API
-    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos");
+    const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos-global");
     const productos = await res.json();
 
     // 2. Filtrar solo los productos de "Global Imports"
