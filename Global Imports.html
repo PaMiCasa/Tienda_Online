@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Global Imports</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <style>
+    /* Estilo especial para esta página */
+    .global-imports-container {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .global-imports-container h1 {
+      font-size: 2.2rem;
+      color: #0077b6;
+      margin-bottom: 1.2rem;
+    }
+
+    .global-imports-container p {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.7;
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .global-imports-container h1 {
+        font-size: 1.8rem;
+      }
+      .global-imports-container p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="main-header">
-    <img src="img/GLOBAL BANNER.jpg" alt="Global Imports Banner" class="form-banner">
+    <img src="GLOBAL%20BANNER.jpg" alt="Global Imports Banner" class="form-banner">
     <div class="header-overlay">
       <div class="header-actions">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -38,8 +69,8 @@
   <section class="global-imports-container">
     <h1>Sobre Global Imports</h1>
     <p>
-      En Global Imports nos encargamos de encontrar, cotizar y traer cualquier producto que necesites de tiendas como Amazon, Aliexpress, Temu, Shein y muchas más, entregándolo directamente en tu hogar. <br><br>
-      Nos especializamos en darte un servicio personalizado, rápido y seguro, asegurando calidad en cada pedido que realizas con nosotros. 
+      Global Imports es el servicio que conecta tus sueños con el mundo. Nos encargamos de buscar, cotizar y traer hasta tu hogar los productos que deseas desde Amazon, AliExpress, Temu, Shein y más. <br><br>
+      Nuestro compromiso es ofrecerte calidad, eficiencia y una experiencia de compra internacional, ¡sin complicaciones!
     </p>
   </section>
 
@@ -53,6 +84,14 @@
     <p>© 2025 Global Imports. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- Script para abrir/cerrar menú -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+  </script>
+
+  <script src="main.js"></script> <!-- Si ya usas main.js para carrito -->
 </body>
 </html>
