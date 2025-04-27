@@ -8,8 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("https://pamicasa-bot-production.up.railway.app/api/productos");
     const productos = await res.json();
 
+    // 👉 Filtrar SOLO los de origen "normal"
+    const productosNormales = productos.filter(prod => prod.origen === "normal");
+
     const productosPorCategoria = {};
-    productos.forEach(prod => {
+    productosNormales.forEach(prod => {
       if (!productosPorCategoria[prod.categoria]) {
         productosPorCategoria[prod.categoria] = [];
       }
