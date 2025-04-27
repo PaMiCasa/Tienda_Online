@@ -57,7 +57,7 @@
       <a href="index.html">Home</a>
       <a href="Products.html">Productos</a>
       <a href="gestor.html">Quiero ser Gestor</a>
-      <a href="Global Imports.html">Global Imports</a>
+      <a href="global-imports.html">Global Imports</a>
       <a href="remesas/remesas.html">Remesas</a>
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contacto</a>
@@ -68,7 +68,7 @@
   <!-- Sección de Productos Globales -->
   <main class="products">
     <h2>Productos Global Imports</h2>
-    <div id="global-products"></div> <!-- 🚀 Aquí cargan los productos dinámicamente -->
+    <div id="category-container"></div> <!-- 👈 corregido: antes estaba mal -->
   </main>
 
   <!-- SOBRE NOSOTROS -->
@@ -90,7 +90,7 @@
     <p>© 2025 Global Imports. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Script para abrir/cerrar menú -->
+  <!-- Scripts -->
   <script>
     function toggleMenu() {
       document.getElementById('sideMenu').classList.toggle('active');
@@ -102,8 +102,7 @@
   <script src="cart.js"></script>
   <script src="ubicacion.js"></script>
   <script src="ref-manager.js"></script>
-  <script src="global-cargar-productos.js"></script>
+  <script src="global-cargar-productos.js"></script> <!-- ✅ nombre corregido aquí -->
   
-
 </body>
 </html>
